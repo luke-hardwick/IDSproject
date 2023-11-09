@@ -18,6 +18,21 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 # Add any other libraries here
 
+demo <- tribble(
+  ~REASON,             ~freq,
+  "Other",             69,
+  "Failure to Comply", 147,
+  "Good Progress",     27,
+  "Full Course",       1197,
+  "Conviction",        177
+)
+
+ggplot(data = demo) +
+  geom_bar(mapping = aes(x = REASON, y = freq), stat = "identity") +
+  labs(title = "Termination Reasons in the East Midlands 2023", x = "Reason", y = "Terminations" ) +
+  scale_y_continuous(breaks=seq(0,1250,by=100))
+  
+
 
 
 ```
