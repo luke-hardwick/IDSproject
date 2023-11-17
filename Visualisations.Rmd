@@ -1,0 +1,79 @@
+---
+title: "Visualisations"
+author: "Team members"
+date: "2023-11-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library("tidyverse")
+library("xlsx")
+```
+
+
+```{r vis, out.width="100%"}
+# Still Very much in the early stages. This should be taken as rough working.
+
+Crimes_County <- xlsx::read.xlsx("data/CSV/Crimes_by_County-Region.xlsx", sheetIndex = 4)
+
+Crimes_County <- na.omit(Crimes_County)
+Crimes_County
+Crimes_County[2,]
+
+Region_names <- c(1:9)
+County_names <- c(1:39)
+
+
+last_region_index = 1
+last_county_index = 1
+for(x in c(4:51))
+{
+  if( substr((Crimes_County[x,])[1], 1, 2) == "E2")
+  {
+    County_names[last_county_index] <- (Crimes_County[x,])[2]
+    last_county_index <- last_county_index + 1
+  } 
+  else
+  {
+    Region_names[last_region_index] <- (Crimes_County[x,])[2]
+    last_region_index  <- last_region_index + 1
+  }
+  
+}
+rm(last_region_index)
+rm(last_county_index)
+
+#Columns of note
+
+#|| Violence against the person || Sexual offences || Robbery || Theft offences || Criminal damage and arson ||
+#||           3                 ||        10       ||    11   ||      12        ||            21             ||
+
+#|| Drug offences || Possession of weapons offences || Public order offences || Miscellaneous crimes ||
+#||       22      ||               23               ||          24           ||           25         ||
+
+col_int <- c(3,10,11,12,21,22,23,24,25)
+col_names <- c("Violence against the person", "Sexual offences", "Robbery", "Theft offences", 
+               "Criminal damage and arson", "Drug offences", "Possesion of weapons offences", 
+               "Public order offences", "Miscellaneous crimes") 
+
+region_crimes <- function(r)
+{
+  data.frame(row.names = col_names, )
+}
+
+#for(x in c(1:9))
+#{
+#  ggplot(data = )
+#}
+
+```
+
+
+```{r load-data}
+
+
+
+
+```
