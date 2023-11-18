@@ -29,4 +29,4 @@ Work that needs to get done (by the deadline):
 ... Presentation
 
 I don't know how much of this gets done, just do as much as possible for the 24th.
-I think the best course of action would be to split the workload. I'll start with the visualisations 
+I think the best course of action would be to split the workload. I'll start with the visualisations and create a model for factors and crime rate.
