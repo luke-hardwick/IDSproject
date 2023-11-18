@@ -1,0 +1,32 @@
+For next week we should have a substantial part of the project done. We should centre our work around these core questions/goals:
+
+. What demographic factor influence crime in particular regions/counties?
+. How much does certain demographic factors incluence crime? (e.g areas with a lower mean household income would be expected to have a higher crime rate compared to areas with a higher mean household income)
+. How does demographic factors influence sentencing?
+. What factors have the greatest influence (both in crime and in sentencing)?
+
+The demographic factors that I have in mind are these:
+
+. Mean income (of region/county)
+. Ethnicity
+. Race
+. Sex
+. Nationality (Are they foreign-born or not)
+. Poverty rate (of region/county) (ties in with mean income)
+
+If you can think of any more write them here:
+
+
+---
+
+Work that needs to get done (by the deadline):
+
+... Create visualisations of Crime by Region and County.
+... Examine the relationship between demographic factors and crime (create visualisations)
+... Construct probabilistic model of factors and crime rate (given these factors, what is the crime rate likely to be)
+... Examine demogaphic factors and sentencing (visualisation, model)
+... Report
+... Presentation
+
+I don't know how much of this gets done, just do as much as possible for the 24th.
+I think the best course of action would be to split the workload. I'll start with the visualisations 
