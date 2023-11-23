@@ -1,6 +1,6 @@
 ---
-title: "Presentation title"
-subtitle: "Presentation subtitle (if any)"
+title: "Prison Demographics"
+subtitle: "Crime Rates & Sentencing"
 author: "Team name <br> Luke Hardwick, Adam Smit, Jess Part"
 institute: "University of Edinburgh"
 date: "`r Sys.Date()`"
@@ -53,21 +53,31 @@ style_xaringan(
 
 class: center, middle
 
-## A statement of the overall goal / research question
+## We pose the question of what demographic factors lead to individuals committing crime and how demographics can influence sentencing
 
 ---
 
 class: inverse, center, middle
 
-# Section title
+# How do demographics and regional incomes influence crime rates?
 
 ---
 
 # Hello World
 
-- Click the `Knit` button to compile your presentation
+---
 
-- Make sure to commit and push all resulting files to your GitHub repo
+class: inverse, center, middle
+
+# How much are specific factors connected with crime?
+
+---
+
+---
+
+class: inverse, center, middle
+
+# Which factors have the greatest influence in crime and sentencing?
 
 ---
 
