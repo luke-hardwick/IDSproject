@@ -60,7 +60,15 @@ age_groups <- tribble(
 
 ggplot(data = age_groups) +
   geom_bar(mapping = aes(x = Reason, y = freq), stat = "identity")
-      
+
+# Having a look at intake vs outtake 
+
+sum(terminationsQ12023[ ,"COUNT"], na.rm = TRUE)
+# 23285
+sum(startsQ12023[ ,"COUNT"], na.rm = TRUE)
+# 131700
+
+
   
 
 

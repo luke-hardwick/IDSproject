@@ -1,6 +1,6 @@
 ---
 title: "Visualisations"
-author: "Team members"
+author: "Luke Hardwick, Adam Smit, Jess Part"
 date: "2023-11-10"
 output: html_document
 ---
