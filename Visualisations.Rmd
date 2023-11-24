@@ -71,7 +71,7 @@ region_crimes <- function(r)
 ```
 
 
-```{r load-data}
+```{R load-data}
 
 
 
