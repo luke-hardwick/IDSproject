@@ -325,9 +325,170 @@ tidy(Crime_Fit)
 ```
 
 
-```{r load-data}
+```{R load-data}
 
 
 
+
+################################################################
+
+#might wanna turn on echo=false further down in the section as theres some real mountains of code
+#that are just there to backup data and arent essential
+
+################################################################
+
+#############################
+
+## comparison of demographics average time spent in solitary 
+
+
+
+PunishmentsQ12023 <- read.csv("data/CSV/PunishmentsQ12023.csv")
+
+Punishmentsminusna <- PunishmentsQ12023 %>% filter(No_of_days != ".")
+Punishmentscellconfine <- Punishmentsminusna %>% filter(Punishment == "Cellular Confinement")
+Punishmentsnumeric <- Punishmentscellconfine %>% mutate(No_of_days = as.numeric(No_of_days))
+
+### ethnicity
+
+solitaryethnicity <- Punishmentsnumeric %>% 
+  group_by(Ethnicity) %>%
+  summarise(
+    mean_days_in_solitary = mean(No_of_days)
+  )
+
+ggplot(data = solitaryethnicity, mapping = aes(y = Ethnicity, x = mean_days_in_solitary)) +
+  geom_bar(stat = "identity") +
+  labs (
+    y = "Ethnicity",
+    x = "average days in solitary",
+    title = "average time each ethnicity spends in solitary",
+    subtitle = 
+      "The average amount of time each ethnicity spends in solitary when sentenced to it as punishment whilst already incarcerated"
+  )
+
+## religion
+
+solitaryreligion <- Punishmentsnumeric %>% 
+  group_by(Religion) %>%
+  summarise(
+    mean_days_in_solitary = mean(No_of_days)
+  )
+
+ggplot(data = solitaryreligion, mapping = aes(y = Religion, x = mean_days_in_solitary)) +
+  geom_bar(stat = "identity") +
+  labs (
+    y = "Religion",
+    x = "average days in solitary",
+    title = "average time each religion spends in solitary",
+    subtitle = 
+      "The average amount of time each religion spends in solitary when sentenced to it as punishment whilst already incarcerated"
+  )
+
+## age
+
+solitaryage <- Punishmentsnumeric %>% 
+  group_by(Age_group) %>%
+  summarise(
+    mean_days_in_solitary = mean(No_of_days)
+  )
+
+ggplot(data = solitaryage, mapping = aes(y = Age_group, x = mean_days_in_solitary)) +
+  geom_bar(stat = "identity") +
+  labs (
+    y = "age",
+    x = "average days in solitary",
+    title = "average time an age group spends in solitary",
+    subtitle = 
+      "The average amount of time each age group spends in solitary when sentenced to it as punishment whilst already incarcerated"
+  )
+
+###############################
+
+#### percentage of demographics being Category A (high security)
+
+## percentages can all be backed up by the mountain of code
+
+
+categoryaethnicity <- data.frame(ethnicity = 
+  c("Asian or Asian British", "Black/ African/ Caribbean/ Black British", "Mixed/ Multiple ethnic groups", "Other ethnic group", "White", "Not known"),
+percentage = c(6.681351, 6.914817, 5.98262, 7.604563, 5.207938, 3.343465))
+
+
+## mountain of code
+
+c(
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Ethnicity == "a Asian or Asian British")) / count(filter(PunishmentsQ12023, Ethnicity == "a Asian or Asian British")) *100,
+               count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Ethnicity == "b Black/ African/ Caribbean/ Black British")) / count(filter(PunishmentsQ12023, Ethnicity == "b Black/ African/ Caribbean/ Black British")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Ethnicity == "c Mixed/ Multiple ethnic groups")) / count(filter(PunishmentsQ12023, Ethnicity == "c Mixed/ Multiple ethnic groups")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Ethnicity == "d Other ethnic group")) / count(filter(PunishmentsQ12023, Ethnicity == "d Other ethnic group")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Ethnicity == "e White")) / count(filter(PunishmentsQ12023, Ethnicity == "e White")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Ethnicity == "f Not known")) / count(filter(PunishmentsQ12023, Ethnicity == "f Not known")) *100)
+                      
+ggplot(data = categoryaethnicity, mapping = aes(y = ethnicity, x = percentage)) +
+  geom_bar(stat = "identity") +
+  labs (
+    y = "Ethnicity",
+    x = "proportion of people in high security establishments (%)",
+    title = "percentage of ethnicities considered to be high security risks",
+  )
+
+
+## age
+
+categoryaage <- data.frame(age = 
+  c("18 - 20", "21 - 24", "25 - 29", "30 - 39", "40 - 49", "50 - 59", "60 - 69", "70 and over", "15 - 17"),
+percentage = c(2.037432, 5.839087, 5.979534, 6.93647, 6.37706, 7.416564, 4.709141, 9.722222, 0))
+
+
+## mountain of code
+
+c(
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Age_group == "18 - 20")) / count(filter(PunishmentsQ12023, Age_group == "18 - 20")) *100,
+               count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Age_group == "21 - 24")) / count(filter(PunishmentsQ12023, Age_group == "21 - 24")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Age_group == "25 - 29")) / count(filter(PunishmentsQ12023, Age_group == "25 - 29")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Age_group == "30 - 39")) / count(filter(PunishmentsQ12023, Age_group == "30 - 39")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Age_group == "40 - 49")) / count(filter(PunishmentsQ12023, Age_group == "40 - 49")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Age_group == "50 - 59")) / count(filter(PunishmentsQ12023, Age_group == "50 - 59")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Age_group == "60 - 69")) / count(filter(PunishmentsQ12023, Age_group == "60 - 69")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Age_group == "70 and over")) / count(filter(PunishmentsQ12023, Age_group == "70 and over")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Age_group == "15 - 17")) / count(filter(PunishmentsQ12023, Age_group == "15 - 17")) *100)
+                      
+ggplot(data = categoryaage, mapping = aes(y = age, x = percentage)) +
+  geom_bar(stat = "identity") +
+  labs (
+    y = "Age ranges",
+    x = "proportion of people in high security establishments (%)",
+    title = "percentage of age ranges considered to be high security risks",
+  )
+
+## religion
+
+categoryareligion <- data.frame(religion = 
+  c("Muslim", "No religion", "Christian", "Other religious groups", "Buddhist", "Jewish", "Sikh", "Hindu", "Not recorded"),
+percentage = c(8.563744, 4.101825, 5.171328, 5.037783, 5.015198, 8.219178, 5.633803, 2.941176, 0))
+
+
+## mountain of code
+
+c(
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Religion == "b Muslim")) / count(filter(PunishmentsQ12023, Religion == "b Muslim")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Religion == "i No religion")) / count(filter(PunishmentsQ12023, Religion == "i No religion")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Religion == "a Christian")) / count(filter(PunishmentsQ12023, Religion == "a Christian")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Religion == "g Other religious groups")) / count(filter(PunishmentsQ12023, Religion == "g Other religious groups")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Religion == "e Buddhist")) / count(filter(PunishmentsQ12023, Religion == "e Buddhist")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Religion == "f Jewish")) / count(filter(PunishmentsQ12023, Religion == "f Jewish")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Religion == "d Sikh")) / count(filter(PunishmentsQ12023, Religion == "d Sikh")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Religion == "c Hindu")) / count(filter(PunishmentsQ12023, Religion == "c Hindu")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Religion == "j Not recorded")) / count(filter(PunishmentsQ12023, Religion == "j Not recorded")) *100)
+  
+
+ggplot(data = categoryareligion, mapping = aes(y = religion, x = percentage)) +
+  geom_bar(stat = "identity") +
+  labs (
+    y = "Religion",
+    x = "proportion of people in high security establishments (%)",
+    title = "percentage of Religions considered to be high security risks",
+  )
 
 ```
