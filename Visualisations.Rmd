@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library("tidyverse")
+library("tidymodels")
 library("xlsx")
 ```
 
@@ -142,7 +143,6 @@ for(i in 1:nrow(Crimes_County2))
   Crimes_County2[i,][1] <- unlist(strsplit(as.character(Crimes_County2[i,][1]), split = " Total", fixed = TRUE))
 }
 
-
 Economic2 <- xlsx::read.xlsx("data/CSV/Weekly Pay.xlsx", sheetIndex = 2)
 
 Economic2 <- na.omit(Economic2)
@@ -196,11 +196,131 @@ ggplot(data = Crime_Factors, mapping = aes(x = `Median`, y = `Crime_rate`, label
 
 ### Poverty risk 
 
-###
+poverty_risk <- xlsx::read.xlsx("data/csv/poverty_risk.xlsx", sheetIndex = 1)
+
+poverty_risk <- poverty_risk[c(1,3)]
+colnames(poverty_risk) <- c("LC", "Poverty Risk") 
+
+Crime_Factors <- left_join(Crime_Factors, poverty_risk, by = "LC")
+
+Crime_Factors <- Crime_Factors %>%
+  mutate(`Poverty Risk` = 327 - `Poverty Risk`)
+## number of Local Authorities = 326
+
+ggplot(data = Crime_Factors, mapping = aes(x = `Poverty Risk`, y = `Crime_rate`)) + 
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE)
+
+### unemployment rate
+
+unemply_rate <- xlsx::read.xlsx("data/CSV/employmentlasewcensus2021.xlsx", sheetIndex = 2)
+
+unemply_rate <- na.omit(unemply_rate)
+colnames(unemply_rate) <- unemply_rate[1,]
+unemply_rate <- unemply_rate[-c(1),]
+unemply_rate <-unemply_rate[-c(3,4)]
+unemply_rate <- unemply_rate %>%
+  filter(`Economic activity (high-level) status` == "Unemployed")
+
+unemply_rate <- unemply_rate[-c(1)]
+colnames(unemply_rate) <- c("LC", "Unemployment Rate")
+unemply_rate$`Unemployment Rate` <- as.numeric(unemply_rate$`Unemployment Rate`)
+
+Crime_Factors <- left_join(Crime_Factors, unemply_rate, by = "LC")
+
+ggplot(data = Crime_Factors, mapping = aes(x = `Unemployment Rate`, y = `Crime_rate`)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE)
+
+###### Divorce Rate
+
+divorce_rate <- xlsx::read.xlsx("data/CSV/Divorce.xlsx", sheetIndex = 1)
+
+divorce_rate <- divorce_rate[c(1,2)]
+divorce_rate <- na.omit(divorce_rate)
+divorce_rate <- divorce_rate[-c(1),]
+colnames(divorce_rate) <- c("LC", "Divorce Rate")
+divorce_rate$`Divorce Rate` <- as.numeric(divorce_rate$`Divorce Rate`) 
+
+Crime_Factors <- left_join(Crime_Factors, divorce_rate, by = "LC")
+
+ggplot(data = Crime_Factors, mapping = aes(x = `Divorce Rate`, y = `Crime_rate`)) + 
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE)
 
 
+#### Ethnic Minority Population
 
-###
+ethnic <- xlsx::read.xlsx("data/CSV/ethnic.xlsx", sheetIndex = 2)
+
+ethnic <- ethnic[c(2, 5)]
+ethnic <- na.omit(ethnic)
+colnames(ethnic) <- c("LC", "White British %")
+ethnic <- ethnic[-c(1),] 
+
+for(i in c(1:nrow(ethnic)))
+{
+  new <- unlist(strsplit(as.character(ethnic[i,][1]), split = " ", fixed = TRUE))
+  ethnic[i,][1] <- new[length(new)]
+}
+
+ethnic$`White British %` <- as.numeric(ethnic$`White British %`)
+
+ethnic$`White British %` <- 1000 * ethnic$`White British %`
+
+Crime_Factors <- left_join(Crime_Factors, ethnic, by = "LC")
+
+Crime_Factors <- Crime_Factors %>%
+  mutate(`White British %` = (`White British %`/`Population`) * 100)
+
+Crime_Factors <- Crime_Factors %>%
+  mutate(`Non White British %` = 100 - `White British %`)
+
+
+ggplot(data = Crime_Factors, mapping = aes(x = `Non White British %`, y = `Crime_rate`, label = `LC`)) + 
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE) + 
+  labs(title = "% Ethnic Minority Population Vs Crime Rate (by Local Authority)",
+       x = "% Non British White", y = "Crime Rate (per Capita)")
+
+#Crime_Factors
+
+### Religion
+
+Religion <- xlsx::read.xlsx("data/CSV/ethnic.xlsx", sheetIndex = 3)
+
+Religion <- Religion[c(2, 5, 12)]
+Religion <- na.omit(Religion)
+
+Religion <- Religion[-c(1),]
+colnames(Religion) <-c("LC", "Christian", "Non-Religious")
+
+for(i in c(1:nrow(Religion)))
+{
+  new <- unlist(strsplit(as.character(Religion[i,][1]), split = " ", fixed = TRUE))
+  Religion[i,][1] <- new[length(new)]
+}
+
+Religion$`Christian` <- as.numeric(Religion$`Christian`)
+Religion$`Non-Religious` <- as.numeric(Religion$`Non-Religious`)
+
+Crime_Factors <- left_join(Crime_Factors, Religion, by = "LC")
+Crime_Factors <- Crime_Factors %>%
+  mutate(`% Minority Religion` = 100*(1 - (1000*(`Christian` + `Non-Religious`))/`Population`))
+
+#Crime_Factors
+
+ggplot(data = Crime_Factors, mapping = aes(x = `% Minority Religion`, y = `Crime_rate`)) + 
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE)
+
+colnames(Crime_Factors)
+
+Crime_Fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(`Crime_rate` ~ `Poverty Risk` + `Unemployment Rate` + `Divorce Rate` + 
+        `Non White British %` + `% Minority Religion`, data = Crime_Factors)
+tidy(Crime_Fit)
 
 ```
 
