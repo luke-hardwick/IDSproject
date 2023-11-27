@@ -283,6 +283,8 @@ ggplot(data = Crime_Factors, mapping = aes(x = `Non White British %`, y = `Crime
   labs(title = "% Ethnic Minority Population Vs Crime Rate (by Local Authority)",
        x = "% Non British White", y = "Crime Rate (per Capita)")
 
+cor.test(Crime_Factors$`Non White British`, Crime_Factors$`Crime_rate`)
+
 #Crime_Factors
 
 ### Religion
