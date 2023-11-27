@@ -16,64 +16,201 @@ library("xlsx")
 ```{r vis, out.width="100%"}
 # Still Very much in the early stages. This should be taken as rough working.
 
-Crimes_County <- xlsx::read.xlsx("data/CSV/Crimes_by_County-Region.xlsx", sheetIndex = 4)
+Crimes_Region_County <- xlsx::read.xlsx("data/CSV/Crimes_by_County-Region.xlsx", sheetIndex = 4)
+Crimes_Region_County <- na.omit(Crimes_Region_County)
+colnames(Crimes_Region_County) <- Crimes_Region_County[1,]
+Crimes_Region_County <- Crimes_Region_County[-c(1,2,3),]
 
-Crimes_County <- na.omit(Crimes_County)
-Crimes_County
-Crimes_County[2,]
-
-Region_names <- c(1:9)
-County_names <- c(1:39)
-
-
-last_region_index = 1
-last_county_index = 1
-for(x in c(4:51))
-{
-  if( substr((Crimes_County[x,])[1], 1, 2) == "E2")
-  {
-    County_names[last_county_index] <- (Crimes_County[x,])[2]
-    last_county_index <- last_county_index + 1
-  } 
-  else
-  {
-    Region_names[last_region_index] <- (Crimes_County[x,])[2]
-    last_region_index  <- last_region_index + 1
-  }
-  
-}
-rm(last_region_index)
-rm(last_county_index)
-
-#Columns of note
-
-#|| Violence against the person || Sexual offences || Robbery || Theft offences || Criminal damage and arson ||
-#||           3                 ||        10       ||    11   ||      12        ||            21             ||
-
-#|| Drug offences || Possession of weapons offences || Public order offences || Miscellaneous crimes ||
-#||       22      ||               23               ||          24           ||           25         ||
-
-col_int <- c(3,10,11,12,21,22,23,24,25)
+col_int <- c(4,10,11,12,21,22,23,24,25)
 col_names <- c("Violence against the person", "Sexual offences", "Robbery", "Theft offences", 
                "Criminal damage and arson", "Drug offences", "Possesion of weapons offences", 
                "Public order offences", "Miscellaneous crimes") 
 
-region_crimes <- function(r)
+County_names <- Crimes_Region_County %>%
+  filter(substr(`Area Code`, 1, 2) == "E2")
+
+Region_names <- Crimes_Region_County %>% 
+  filter(substr(`Area Code`, 1, 2) == "E1")
+
+Region_names <- Region_names[2]
+Region_names <- Region_names[,"Area Name"]
+County_names <- County_names[2]
+County_names <- County_names[,"Area Name"]
+
+#Removes Violence and theft breakdown
+Crimes_Region_County <- Crimes_Region_County[-c(5:9, 13:20)]
+
+
+for(i in Region_names)
 {
-  data.frame(row.names = col_names, )
+  
+  crimes <- Crimes_Region_County %>% filter(`Area Name` == i)
+  crimes <- crimes[c(1),]
+  crimes <- crimes[-c(1,2,3)]
+  
+  df <- data.frame(matrix(ncol = 2, nrow = length(col_names)) )
+  colnames(df) <- c("Crime", "Occurrences")
+  
+  for( j in c(1:length(col_names)) )
+  {
+    df[j,] <- c(col_names[j], as.numeric(crimes[j]))
+  }
+  
+  df$Occurrences <- as.numeric(df$Occurrences)
+
+  print(ggplot(df, aes(x = Crime, y = Occurrences, fill = Crime) ) + 
+         geom_bar(stat = "identity") +
+  scale_x_discrete(guide = guide_axis(n.dodge = 5)) + 
+    labs(
+      title = paste("Crime in", i)
+    ))
+
 }
 
-#for(x in c(1:9))
-#{
-#  ggplot(data = )
-#}
+####### Crime Rate 
+Crimes_Region_County_Per <- xlsx::read.xlsx("data/CSV/Crimes_by_County-Region.xlsx", sheetIndex = 6)
+Crimes_Region_County_Per <- na.omit(Crimes_Region_County_Per)
+colnames(Crimes_Region_County_Per) <- Crimes_Region_County_Per[1,]
+Crimes_Region_County_Per <- Crimes_Region_County_Per[-c(1,2,3),]
+
+Crimes_Region_County_Per <- Crimes_Region_County_Per %>%
+  filter( substr(`Area Code`, 1, 2) == "E2")
+
+Crimes_Region_County_Per <- Crimes_Region_County_Per[c(2, 5)]
+
+colnames(Crimes_Region_County_Per) <- c("County", "Crime rate (per 1000)")
+
+####### Mean income
+
+Economic <- readODS::read_ods("data/CSV/Economic_Stats.ods", sheet = 2)
+Economic <- na.omit(Economic)
+colnames(Economic) <- Economic[1,]
+Economic <- Economic[-c(1,2,3),]
+
+Economic <- Economic %>% 
+  filter(substr(`Region / County codes`, 1, 3) != "E12" & substr(`Region / County codes`, 1, 2) == "E1")
+
+Economic <- Economic[c(2, 16, 17)]
+colnames(Economic) <- c("County", colnames(Economic)[2], colnames(Economic)[3])
+
+df <- left_join(Crimes_Region_County_Per, Economic, by = "County")
+df <- na.omit(df)
+df <- arrange(df, desc(`Total income: Mean`))
+df$`Crime rate (per 1000)` <- as.numeric(df$`Crime rate (per 1000)`)
+
+### Mean income vs crime rate
+
+ggplot(data = df, mapping = aes(x = `Total income: Mean`, y = `Crime rate (per 1000)`, label = `County`)) +
+  geom_point() +
+  scale_x_discrete(guide = guide_axis(n.dodge = 5)) + 
+  labs(
+    title = "Mean Income(£) vs Crime rate (Per 1000)",
+    x = "Mean Income(£)",
+    y = "Crime Rate (Per 1000)"
+  ) + 
+  geom_text(hjust = 0, vjust = 0)
+
+### Median income vs crime rate
+
+ggplot(data = df, mapping = aes(x = `Total income: Median`, y = `Crime rate (per 1000)`, label = `County`)) + 
+  geom_point() + 
+  scale_x_discrete(guide = guide_axis(n.dodge = 5)) + 
+  labs(
+    title = "Median Income(£) vs Crime Rate (Per 1000)",
+    x = "Median Income(£)",
+    y = "Crime Rate (Per 1000)"
+  ) + 
+  geom_text(hjust = 0, vjust = 0)
+
+##################################
+
+#### Other Crimes table
+
+Crimes_County2 <- xlsx::read.xlsx("data/CSV/Crimes_County2.xlsx", sheetIndex = 2)
+colnames(Crimes_County2) <- Crimes_County2[1,]
+
+colnames(Crimes_County2)[4] = "Number"
+Crimes_County2 <- Crimes_County2[-c(1,3)]
+Crimes_County2 <- na.omit(Crimes_County2)
+Crimes_County2 <- Crimes_County2 %>%
+  filter(grepl("Total", `CSP`))
+
+colnames(Crimes_County2)[1] <- "LC"
+
+for(i in 1:nrow(Crimes_County2))
+{
+  Crimes_County2[i,][1] <- unlist(strsplit(as.character(Crimes_County2[i,][1]), split = " Total", fixed = TRUE))
+}
+
+
+Economic2 <- xlsx::read.xlsx("data/CSV/Weekly Pay.xlsx", sheetIndex = 2)
+
+Economic2 <- na.omit(Economic2)
+
+colnames(Economic2) <- Economic2[1,]
+Economic2 <- Economic2[-c(1),]
+colnames(Economic2)[1] <- c("LC") 
+
+Economic2 <- Economic2 %>%
+  filter(substr(`LC`, 1, 1) == " ")
+
+for(i in c(1:nrow(Economic2)))
+{
+  Economic2[i,][1] <- unlist(strsplit(as.character(Economic2[i,][1]), split = " ", fixed = TRUE))[3]
+}
+
+pop_stats <-xlsx::read.xlsx("data/CSV/Population_Stats.xlsx", sheetIndex = 17)
+pop_stats <- na.omit(pop_stats)
+colnames(pop_stats) <- c("LC", "Population", "Median Age")
+
+Crime_Factors <- left_join(Crimes_County2, Economic2, by = "LC")
+Crime_Factors <- left_join(Crime_Factors, pop_stats, by = "LC")
+Crime_Factors <- na.omit(Crime_Factors)
+
+Crime_Factors <- Crime_Factors %>%
+  mutate(Crime_rate = `Number`/`Population`)
+
+Crime_Factors$Mean <- as.numeric(Crime_Factors$Mean) 
+Crime_Factors$Median <- as.numeric(Crime_Factors$Median)
+
+ggplot(data = Crime_Factors, mapping = aes(x = `Mean`, y = `Crime_rate`, label = `LC`)) + 
+  geom_point() + 
+  labs(
+    title = "Mean weekly pay (£) vs Crime rate (Crimes per person)",
+    x = "Mean weekly pay (£)",
+    y = "Crime Rate"
+  ) + 
+    geom_smooth(method = lm, se = FALSE)
+
+
+ggplot(data = Crime_Factors, mapping = aes(x = `Median`, y = `Crime_rate`, label = `LC`)) + 
+  geom_point() + 
+  labs(
+    title = "Median weekly pay (£) vs Crime rate (Crimes per person)",
+    x = "Median weekly pay (£)",
+    y = "Crime Rate"
+  ) + 
+    geom_smooth(method = lm, se = FALSE)
+
+##################################
+
+### Poverty risk 
+
+###
+
+
+
+###
 
 ```
 
 
 ```{R load-data}
 
+Punishmentsminusna <- PunishmentsQ12023 %>% filter(No of days != ".")
 
+ggplot(data = mtcars, mapping = aes(x = "wt")) +
+  geom_histogram()
 
 
 ```
