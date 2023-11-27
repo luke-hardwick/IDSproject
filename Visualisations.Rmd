@@ -283,6 +283,24 @@ ggplot(data = solitaryage, mapping = aes(y = Age_group, x = mean_days_in_solitar
       "The average amount of time each age group spends in solitary when sentenced to it as punishment whilst already incarcerated"
   )
 
+##sex
+
+solitarysex <- Punishmentsnumeric %>% 
+  group_by(Sex) %>%
+  summarise(
+    mean_days_in_solitary = mean(No_of_days)
+  )
+
+ggplot(data = solitarysex, mapping = aes(y = Sex, x = mean_days_in_solitary)) +
+  geom_bar(stat = "identity") +
+  labs (
+    y = "sex",
+    x = "average days in solitary",
+    title = "average time wach sex spends in solitary",
+    subtitle = 
+      "The average amount of time each sex spends in solitary when sentenced to it as punishment whilst already incarcerated"
+  )
+
 ###############################
 
 #### percentage of demographics being Category A (high security)
@@ -367,6 +385,30 @@ ggplot(data = categoryareligion, mapping = aes(y = religion, x = percentage)) +
   geom_bar(stat = "identity") +
   labs (
     y = "Religion",
+    x = "proportion of people in high security establishments (%)",
+    title = "percentage of Religions considered to be high security risks",
+  )
+
+
+## Sex
+
+categoryasex <- data.frame(sex = 
+  c("Male", "Female"),
+percentage = c(5.989141, 0))
+
+
+## mountain of code
+
+c(
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Sex == "M")) / count(filter(PunishmentsQ12023, Sex == "M")) *100,
+  count(filter(PunishmentsQ12023, Predominant_function_of_establishment == "Category A (High Security)", Sex == "F")) / count(filter(PunishmentsQ12023, Sex == "F")) *100)
+
+  
+
+ggplot(data = categoryasex, mapping = aes(y = sex, x = percentage)) +
+  geom_bar(stat = "identity") +
+  labs (
+    y = "Sex",
     x = "proportion of people in high security establishments (%)",
     title = "percentage of Religions considered to be high security risks",
   )
