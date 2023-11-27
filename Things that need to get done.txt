@@ -12,7 +12,7 @@ The demographic factors that I have in mind are these:
 . Race
 . Sex
 . Nationality (Are they foreign-born or not)
-. Poverty rate (of region/county) (ties in with mean income)
+. Poverty rate (of region) (ties in with mean income)
 
 If you can think of any more write them here:
 
