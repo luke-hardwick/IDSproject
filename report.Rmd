@@ -55,6 +55,9 @@ This data set includes the offender management statistics from January to March 
 
 Ministry of Justice, HM Prison and Probation service, 2023, Offender Management statistics quarterly: January to March 2023, Electronic dataset, Viewed 23/11/2023 <https://www.gov.uk/government/statistics/offender-management-statistics-quarterly-january-to-march-2023>
 
+Office for National Statistics, 2023, Employee Earnings in the UK:2023, Electronic dataset, Viewed 28/11/2023
+<https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/2023>
+
 Office for National Statistics, 2023, Employment in Local Authorities, England and Wales: Census 2021, Electronic dataset, Viewed 28/11/2023
 <https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/employmentinlocalauthoritiesenglandandwales/census2021>
 
@@ -64,7 +67,6 @@ Office for National Statistics, 2021, Population Estimates by ethnic group and r
 Office for National Statistics, 2022, Divorces in England and Wales: 2021, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/divorce/bulletins/divorcesinenglandandwales/2021>
 
 Office for National Statistics, 2023, Crime in England and Wales: Police Force Area data Tables, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/datasets/policeforceareadatatables> 
-
 Office for National Statistics, 2019, Recorded crime data at Community Safety Partnership and local authority level, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/datasets/recordedcrimedataatcommunitysafetypartnershiplocalauthoritylevel>
 
 GOV.UK, HM Revenue & Customs, 2023, Income and tax by county and region:2020 to 2021, Electronic dataset, Viewed 28/11/2023 
