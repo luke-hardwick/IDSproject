@@ -1,6 +1,6 @@
 ---
 title: "Prison Demographics"
-author: "by Team-Name: Jess Part, Adam Smit, Luke Hardwick"
+author: "LAJ: Jess Part, Adam Smit, Luke Hardwick"
 date: "`r Sys.Date()`"
 output: html_document
 ---
@@ -44,10 +44,6 @@ This data set includes the offender management statistics from January to March 
 We selected additional datasets for regional income information. The “Annual Survey of Hours and Earnings” is an annual survey provided by the Office for National Statistics and details pay and paid hours. “Employee Earnings in the UK: 2023” is a dataset derived from the ASHE, from which we are using weekly pay by region to model income. We are also using “Income and tax by county and region” for additional information as provided for the 2020 – 2021 financial year by the HMRC. For data on employment by region we’re using “Employment in Local Authorities, England and Wales” which covers adults experiencing employment, unemployment and inactivity as provided by the 2021 census. In addition to the prison population statistics, we are using regional populations of the selected demographics to explore their effect on regional crime rates. These are “Population Estimates by ethnic group and religion” provided by the office for national statistics and “Population Supplementary Data Tables” provided by the Department for Environment, Food and Rural affairs. 
 
 For our investigation into correlations between demographics and crime we chose datasets providing the offence group of crime committed. “Crime in England and Wales: Police Force Area data Tables” and “Recorded crime data at Community Safety Partnership and local authority level” are both produced by the office for national statistics and represent the years 2022 & 2018 respectively. An extra factor we investigated was the “Divorces in England and Wales” as per the 2021 census to see if it had any influence on crime rate.
-
-
-
-
 
 ## Findings
 
