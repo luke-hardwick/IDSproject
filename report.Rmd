@@ -32,7 +32,7 @@ library(tidyverse)
 ## Research Question
 
 
-Prison reform has had huge relevance in recent UK politics. Overcrowding particularly has led to the general belief that the current prison system is unsustainable.With a 6% increase in prison population from 2022 to a total of 85,851 prisoners in June 2023. Guards have been placed in increasingly unsafe working conditions and as a response inmates face a huge duration of their time trapped in their cells. Chief Inspector of Prisons, Charlie Taylor, has warned that the prison population crisis “will mean more deprivation, squalor and the risk of further violence”. Inadequate conditions are likely to cause prisoners to be released back into the community without receiving the support that they require to prevent reoffending. Hence contributing further to the issue. We are interested in what causes people to initially end up behind bars. We pose the question of what demographic factors lead to individuals committing crime, and how demographics can influence sentencing. Specifically, we aim to determine how demographic factors and regional income influence crime rates, how much a specific factor is connected to crime and which factors have the greatest influence in both crime and sentencing. 
+Prison reform has had huge relevance in recent UK politics. Overcrowding particularly has led to the general belief that the current prison system is unsustainable. With a 6% increase in prison population from 2022 to a total of 85,851 prisoners in June 2023. Guards have been placed in increasingly unsafe working conditions and as a response inmates face a huge duration of their time trapped in their cells. Chief Inspector of Prisons, Charlie Taylor, has warned that the prison population crisis “will mean more deprivation, squalor and the risk of further violence”. Inadequate conditions are likely to cause prisoners to be released back into the community without receiving the support that they require to prevent reoffending. Hence contributing further to the issue. We are interested in what causes people to initially end up behind bars. We pose the question of what demographic factors relate to individuals committing crime and how demographics can influence sentencing and the treatment inmates experience in prison.
 
 
 
@@ -79,7 +79,21 @@ Make sure to hide your code with  `echo = FALSE` unless the point you are trying
 
 Ministry of Justice, HM Prison and Probation service, 2023, Offender Management statistics quarterly: January to March 2023, Electronic dataset, Viewed 23/11/2023 <https://www.gov.uk/government/statistics/offender-management-statistics-quarterly-january-to-march-2023>
 
-House of Commons Library, 2023, Poverty in the UK: Statistics, Electronic dataset, Viewed 23/11/2023 <https://commonslibrary.parliament.uk/research-briefings/sn07096/>
+Office for National Statistics, 2023, Employee Earnings in the UK:2023, Electronic dataset, Viewed 28/11/2023
+<https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/2023>
+
+Office for National Statistics, 2023, Employment in Local Authorities, England and Wales: Census 2021, Electronic dataset, Viewed 28/11/2023
+<https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/employmentinlocalauthoritiesenglandandwales/census2021>
+
+Office for National Statistics, 2021, Population Estimates by ethnic group and religion, England and Wales:2019, Electronic dataset, Viewed 28/11/2023
+<https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/articles/populationestimatesbyethnicgroupandreligionenglandandwales/2019>
+
+Office for National Statistics, 2022, Divorces in England and Wales: 2021, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/divorce/bulletins/divorcesinenglandandwales/2021>
+
+Office for National Statistics, 2023, Crime in England and Wales: Police Force Area data Tables, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/datasets/policeforceareadatatables> 
+
+GOV.UK, Department for Environment, Food and Rural affairs, 2023, Population Supplementary Data Tables, Electronic dataset, Viewed 28/11/2023 <https://www.gov.uk/government/statistics/population-statistics-for-rural-england>
+
 
 
 
