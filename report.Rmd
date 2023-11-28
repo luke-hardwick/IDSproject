@@ -48,39 +48,12 @@ This data set includes the offender management statistics from January to March 
 
 ## Findings
 
-The write-up of your project and findings go here. 
-
-Reasons why demographics aren’t the only variables in crime detection:
-
-.Increase in policing, 2019 government manifesto to recruit 20,000 additional police officers has been fulfilled
-
-.Traditionally density of police force is spread unevenly between demographics, although crime may be less prevalent in affluent areas it is also less likely to be detected due to this.
-
-
-Think of this as the text of your presentation with some extra detail to cover what there was not time to discuss in the presentation. This might include any assumptions you made when doing your analysis, any limitations of the work you have done or any ideas you have for future work. Feel free to split this section into subsections to make it easier to read. 
-
-The length should be roughly 1,500 words. 
-If you want to use a word count addin, you can install this by copying and pasting the following into RStudio:
-
-`devtools::install_github("benmarwick/wordcountaddin", type = "source", dependencies = TRUE)`
-
-You will then need to restart RStudio. Once you have done that, select the text you want to count the words of, go to Addins, and select the `Word count` addin.
-This addin counts words using two different algorithms, but the results should be similar and as long as you're in the ballpark of 1,500 words, you're good! 
-The addin will ignore code chunks and only count the words in prose. If you don't want to use the addin you can always copy and paste the text into Microsoft Word to do a Word Count!
-
-You can also load your data here and present any analysis results / plots.
-Make sure to hide your code with  `echo = FALSE` unless the point you are trying to make is about the code itself, in which case you should show your code.
-
-
 
 
 
 ## References
 
 Ministry of Justice, HM Prison and Probation service, 2023, Offender Management statistics quarterly: January to March 2023, Electronic dataset, Viewed 23/11/2023 <https://www.gov.uk/government/statistics/offender-management-statistics-quarterly-january-to-march-2023>
-
-Office for National Statistics, 2023, Employee Earnings in the UK:2023, Electronic dataset, Viewed 28/11/2023
-<https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/2023>
 
 Office for National Statistics, 2023, Employment in Local Authorities, England and Wales: Census 2021, Electronic dataset, Viewed 28/11/2023
 <https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/employmentinlocalauthoritiesenglandandwales/census2021>
@@ -91,6 +64,11 @@ Office for National Statistics, 2021, Population Estimates by ethnic group and r
 Office for National Statistics, 2022, Divorces in England and Wales: 2021, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/divorce/bulletins/divorcesinenglandandwales/2021>
 
 Office for National Statistics, 2023, Crime in England and Wales: Police Force Area data Tables, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/datasets/policeforceareadatatables> 
+
+Office for National Statistics, 2019, Recorded crime data at Community Safety Partnership and local authority level, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/datasets/recordedcrimedataatcommunitysafetypartnershiplocalauthoritylevel>
+
+GOV.UK, HM Revenue & Customs, 2023, Income and tax by county and region:2020 to 2021, Electronic dataset, Viewed 28/11/2023 
+<https://www.gov.uk/government/statistics/income-and-tax-by-county-and-region-2010-to-2011>  
 
 GOV.UK, Department for Environment, Food and Rural affairs, 2023, Population Supplementary Data Tables, Electronic dataset, Viewed 28/11/2023 <https://www.gov.uk/government/statistics/population-statistics-for-rural-england>
 
