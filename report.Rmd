@@ -39,7 +39,7 @@ Prison reform has had huge relevance in recent UK politics. Overcrowding particu
 
 ## Data
 
-This data set includes the offender management statistics from January to March 2023 as provided by the UK government. Prison establishments record details for individual inmates using the prison IT system, which is the main source of data for this dataset. This includes information such as date of birth, sex, religion, nationality and ethnic origin. Which comprise the demographic factors which we are focusing on in this investigation. For the experience of inmates we are using data on punishments recieved in prison. The dataset also includes information of sentencing by region within the UK & Wales, which we hope to combine with regional income, population statistics, employment and divorce rates  to establish their connections in crime and sentencing. 
+This dataset includes the offender management statistics from January to March 2023 as provided by the UK government. Prison establishments record details for individual inmates using the prison IT system, which is the main source of data for this dataset. This includes information such as date of birth, sex, religion, nationality and ethnic origin. Which comprise the demographic factors which we are focusing on in this investigation. For the experience of inmates we are using data on punishments recieved in prison. The dataset also includes information of sentencing by region within the UK & Wales, which we hope to combine with regional income, population statistics, employment and divorce rates  to establish their connections in crime and sentencing. 
 
 We selected additional datasets for regional income information. The “Annual Survey of Hours and Earnings” is an annual survey provided by the Office for National Statistics and details pay and paid hours. “Employee Earnings in the UK: 2023” is a dataset derived from the ASHE, from which we are using weekly pay by region to model income. We are also using “Income and tax by county and region” for additional information as provided for the 2020 – 2021 financial year by the HMRC. For data on employment by region we’re using “Employment in Local Authorities, England and Wales” which covers adults experiencing employment, unemployment and inactivity as provided by the 2021 census. In addition to the prison population statistics, we are using regional populations of the selected demographics to explore their effect on regional crime rates. These are “Population Estimates by ethnic group and religion” provided by the office for national statistics and “Population Supplementary Data Tables” provided by the Department for Environment, Food and Rural affairs. 
 
@@ -54,16 +54,16 @@ For our investigation into correlations between demographics and crime we chose 
 
 Ministry of Justice, HM Prison and Probation service, 2023, Offender Management statistics quarterly: January to March 2023, Electronic dataset, Viewed 23/11/2023 <https://www.gov.uk/government/statistics/offender-management-statistics-quarterly-january-to-march-2023>
 
-Office for National Statistics, 2023, Employee Earnings in the UK:2023, Electronic dataset, Viewed 28/11/2023
-<https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/2023>
+Office for National Statistics, 2023, Earnings and hours worked, place of residence by local authority: ASHE Table 8, Electronic dataset, Viewed 28/11/2023
+<https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/placeofresidencebylocalauthorityashetable8>
 
-Office for National Statistics, 2023, Employment in Local Authorities, England and Wales: Census 2021, Electronic dataset, Viewed 28/11/2023
-<https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/employmentinlocalauthoritiesenglandandwales/census2021>
+Office for National Statistics, 2023, Employment in Local Authorities, England and Wales, Electronic dataset, Viewed 28/11/2023
+<https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/employmentinlocalauthoritiesenglandandwales>
 
-Office for National Statistics, 2021, Population Estimates by ethnic group and religion, England and Wales:2019, Electronic dataset, Viewed 28/11/2023
-<https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/articles/populationestimatesbyethnicgroupandreligionenglandandwales/2019>
+Office for National Statistics, 2019, Population characteristics research tables, Electronic dataset, Viewed 28/11/2023
+<https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationcharacteristicsresearchtables>
 
-Office for National Statistics, 2022, Divorces in England and Wales: 2021, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/divorce/bulletins/divorcesinenglandandwales/2021>
+Office for National Statistics, 2022, Legal partnership status by age, sex and local authority Census 2021, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/marriagecohabitationandcivilpartnerships/datasets/legalpartnershipstatusbyagesexandlocalauthoritycensus2021>
 
 Office for National Statistics, 2023, Crime in England and Wales: Police Force Area data Tables, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/datasets/policeforceareadatatables> 
 Office for National Statistics, 2019, Recorded crime data at Community Safety Partnership and local authority level, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/datasets/recordedcrimedataatcommunitysafetypartnershiplocalauthoritylevel>
@@ -71,7 +71,11 @@ Office for National Statistics, 2019, Recorded crime data at Community Safety Pa
 GOV.UK, HM Revenue & Customs, 2023, Income and tax by county and region:2020 to 2021, Electronic dataset, Viewed 28/11/2023 
 <https://www.gov.uk/government/statistics/income-and-tax-by-county-and-region-2010-to-2011>  
 
-GOV.UK, Department for Environment, Food and Rural affairs, 2023, Population Supplementary Data Tables, Electronic dataset, Viewed 28/11/2023 <https://www.gov.uk/government/statistics/population-statistics-for-rural-england>
+Office for National Statistics, 2022, Estimates of the Population for the UK, England, Wales, Scotland and Nothern Ireland, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland>
+
+Experian, Poverty in England: how Experian ranks where you live, Electronic dataset, Viewed 28/11/2023 <https://www.theguardian.com/news/datablog/2012/mar/06/poverty-england-experian-rankings#data>
+
+
 
 
 
