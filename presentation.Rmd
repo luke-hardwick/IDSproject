@@ -53,7 +53,7 @@ style_xaringan(
 
 class: center, middle
 
-## We pose the question of what demographic factors lead to individuals committing crime and how demographics can influence sentencing
+## We pose the question of what demographic factors lead to individuals committing crime and how these factors can influence sentencing
 
 ---
 
@@ -78,6 +78,14 @@ class: inverse, center, middle
 class: inverse, center, middle
 
 # Which factors have the greatest influence in crime and sentencing?
+
+---
+
+# Sentencing and how it is affected by a potential criminals demographics
+
+- The prison inmate disparities respective to the United states are widely publicised and well known, however
+
+
 
 ---
 
