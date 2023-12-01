@@ -177,9 +177,9 @@ Crime_Factors$Median <- as.numeric(Crime_Factors$Median)
 ggplot(data = Crime_Factors, mapping = aes(x = `Mean`, y = `Crime_rate`, label = `LC`)) + 
   geom_point() + 
   labs(
-    title = "Mean weekly pay (£) vs Crime rate (Crimes per person)",
+    title = "Mean weekly pay (£) vs Crime rate (By Local Authority)",
     x = "Mean weekly pay (£)",
-    y = "Crime Rate"
+    y = "Crime Rate (Crimes per Capita)"
   ) + 
     geom_smooth(method = lm, se = FALSE)
 
@@ -187,9 +187,9 @@ ggplot(data = Crime_Factors, mapping = aes(x = `Mean`, y = `Crime_rate`, label =
 ggplot(data = Crime_Factors, mapping = aes(x = `Median`, y = `Crime_rate`, label = `LC`)) + 
   geom_point() + 
   labs(
-    title = "Median weekly pay (£) vs Crime rate (Crimes per person)",
+    title = "Median weekly pay (£) vs Crime rate (By Local Authority)",
     x = "Median weekly pay (£)",
-    y = "Crime Rate"
+    y = "Crime Rate (Crimes per Capita)"
   ) + 
     geom_smooth(method = lm, se = FALSE)
 
@@ -210,7 +210,12 @@ Crime_Factors <- Crime_Factors %>%
 
 ggplot(data = Crime_Factors, mapping = aes(x = `Poverty Risk`, y = `Crime_rate`)) + 
   geom_point() + 
-  geom_smooth(method = lm, se = FALSE)
+  geom_smooth(method = lm, se = FALSE) + 
+  labs(
+    title = "Poverty Risk Vs Crime rate (By Local Authority)",
+    x = "Poverty risk",
+    y = "Crime Rate (Crimes per Capita)"
+  )
 
 cor.test(Crime_Factors$`Poverty Risk`, Crime_Factors$`Crime_rate`)
 
@@ -233,8 +238,12 @@ Crime_Factors <- left_join(Crime_Factors, unemply_rate, by = "LC")
 
 ggplot(data = Crime_Factors, mapping = aes(x = `Unemployment Rate`, y = `Crime_rate`)) +
   geom_point() +
-  geom_smooth(method = lm, se = FALSE)
-
+  geom_smooth(method = lm, se = FALSE) +
+  labs(
+    title = "Unemployment Rate Vs Crime rate (By Local Authority)",
+    x = "Unemployment Rate",
+    y = "Crime Rate (Crimes per Capita)"
+  )
 cor.test(Crime_Factors$`Unemployment Rate`, Crime_Factors$`Crime_rate`)
 
 ###### Divorce Rate
@@ -251,8 +260,12 @@ Crime_Factors <- left_join(Crime_Factors, divorce_rate, by = "LC")
 
 ggplot(data = Crime_Factors, mapping = aes(x = `Divorce Rate`, y = `Crime_rate`)) + 
   geom_point() + 
-  geom_smooth(method = lm, se = FALSE)
-
+  geom_smooth(method = lm, se = FALSE) +
+  labs(
+    title = "Divorce Rate Vs Crime rate (By Local Authority)",
+    x = "Divorce Rate",
+    y = "Crime Rate (Crimes per Capita)"
+  )
 cor.test(Crime_Factors$`Divorce Rate`, Crime_Factors$`Crime_rate`)
 #### Ethnic Minority Population
 
@@ -285,8 +298,11 @@ Crime_Factors <- Crime_Factors %>%
 ggplot(data = Crime_Factors, mapping = aes(x = `Non White British %`, y = `Crime_rate`, label = `LC`)) + 
   geom_point() + 
   geom_smooth(method = lm, se = FALSE) + 
-  labs(title = "% Ethnic Minority Population Vs Crime Rate (by Local Authority)",
-       x = "% Non British White", y = "Crime Rate (per Capita)")
+  labs(
+    title = "% Ethnic Minority Population Vs Crime Rate (by Local Authority)",
+       x = "% Non British White",
+       y = "Crime Rate (Crimes per Capita)"
+    )
 
 cor.test(Crime_Factors$`Non White British %`, Crime_Factors$`Crime_rate`)
 
@@ -319,16 +335,32 @@ Crime_Factors <- Crime_Factors %>%
 
 ggplot(data = Crime_Factors, mapping = aes(x = `% Minority Religion`, y = `Crime_rate`)) + 
   geom_point() + 
-  geom_smooth(method = lm, se = FALSE)
+  geom_smooth(method = lm, se = FALSE) + 
+  labs(
+    title = "% Non-Christian or Irreligious Vs Crime Rate (by Local Authority)",
+       x = "% Non-Christian or Irreligious",
+       y = "Crime Rate (Crimes per Capita)"
+    )
+
 
 cor.test(Crime_Factors$`% Minority Religion`, Crime_Factors$`Crime_rate`)
 
 colnames(Crime_Factors)
 
+#Re-scale Columns for gradient interpretation
+
+cols <- c("Divorce Rate", "Poverty Risk", "Non White British %", "% Minority Religion", "Unemployment Rate")
+
+for(x in c(1:length(cols)))
+{
+  Crime_Factors[cols[x]] <- Crime_Factors[cols[x]]/max(Crime_Factors[cols[x]])
+}
+
+Crime_Factors
 
 ### Model Testing/Training
 
-set.seed(6969)
+set.seed(1234)
 Crime_split <- initial_split(Crime_Factors)
 
 Crime_train <- training(Crime_split)
@@ -336,7 +368,6 @@ Crime_test <- testing(Crime_split)
 
 Crime_mod <- linear_reg() %>%
   set_engine("lm")
-  #fit(`Crime_rate` ~ . -`LC` )
 
 Crime_rec <- recipe(`Crime_rate` ~ ., data = Crime_train) 
 
@@ -374,7 +405,7 @@ Crime_test_pred %>%
 # tidy(Crime_mod) %>%
 #   print(n = 12)
 
-set.seed(69420)
+set.seed(789)
 
 folds <- vfold_cv(Crime_train, v = 5)
 Crime_fit_rs <- Crime_wflow %>%
