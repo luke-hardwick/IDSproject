@@ -1,6 +1,6 @@
 ---
 title: "Prison Demographics"
-subtitle: "Crime Rates & Sentencing"
+subtitle: "Crime Rates & Incarceration"
 author: "LAJ <br> Luke Hardwick, Adam Smit, Jess Part"
 institute: "University of Edinburgh"
 date: "`r Sys.Date()`"
@@ -47,13 +47,19 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 
 #Background image
 style_xaringan(
-  title_slide_background_image = "img/images.jpg"
+  title_slide_background_image = ("img/Black-Brick-Wall-Background-dark.jpg")
 )
 ```
 
 class: center, middle
 
 ## We pose the question of what demographic factors lead to individuals committing crime and how demographics can influence the experience of people when incarcerated
+
+---
+
+```{r prison, echo = FALSE, out.width = "70%", fig.align = "left", fig.cap = "Belmarsh Prison"}
+include_graphics("img/Roche-Belmarsh-Prison.jpg")
+```
 
 ---
 
