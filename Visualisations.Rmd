@@ -131,6 +131,7 @@ Crimes_County2 <- xlsx::read.xlsx("data/CSV/Crimes_County2.xlsx", sheetIndex = 2
 colnames(Crimes_County2) <- Crimes_County2[1,]
 
 colnames(Crimes_County2)[4] = "Number"
+
 Crimes_County2 <- Crimes_County2[-c(1,3)]
 Crimes_County2 <- na.omit(Crimes_County2)
 Crimes_County2 <- Crimes_County2 %>%
@@ -211,6 +212,8 @@ ggplot(data = Crime_Factors, mapping = aes(x = `Poverty Risk`, y = `Crime_rate`)
   geom_point() + 
   geom_smooth(method = lm, se = FALSE)
 
+cor.test(Crime_Factors$`Poverty Risk`, Crime_Factors$`Crime_rate`)
+
 ### unemployment rate
 
 unemply_rate <- xlsx::read.xlsx("data/CSV/employmentlasewcensus2021.xlsx", sheetIndex = 2)
@@ -232,6 +235,8 @@ ggplot(data = Crime_Factors, mapping = aes(x = `Unemployment Rate`, y = `Crime_r
   geom_point() +
   geom_smooth(method = lm, se = FALSE)
 
+cor.test(Crime_Factors$`Unemployment Rate`, Crime_Factors$`Crime_rate`)
+
 ###### Divorce Rate
 
 divorce_rate <- xlsx::read.xlsx("data/CSV/Divorce.xlsx", sheetIndex = 1)
@@ -248,7 +253,7 @@ ggplot(data = Crime_Factors, mapping = aes(x = `Divorce Rate`, y = `Crime_rate`)
   geom_point() + 
   geom_smooth(method = lm, se = FALSE)
 
-
+cor.test(Crime_Factors$`Divorce Rate`, Crime_Factors$`Crime_rate`)
 #### Ethnic Minority Population
 
 ethnic <- xlsx::read.xlsx("data/CSV/ethnic.xlsx", sheetIndex = 2)
@@ -283,7 +288,7 @@ ggplot(data = Crime_Factors, mapping = aes(x = `Non White British %`, y = `Crime
   labs(title = "% Ethnic Minority Population Vs Crime Rate (by Local Authority)",
        x = "% Non British White", y = "Crime Rate (per Capita)")
 
-cor.test(Crime_Factors$`Non White British`, Crime_Factors$`Crime_rate`)
+cor.test(Crime_Factors$`Non White British %`, Crime_Factors$`Crime_rate`)
 
 #Crime_Factors
 
@@ -316,13 +321,68 @@ ggplot(data = Crime_Factors, mapping = aes(x = `% Minority Religion`, y = `Crime
   geom_point() + 
   geom_smooth(method = lm, se = FALSE)
 
+cor.test(Crime_Factors$`% Minority Religion`, Crime_Factors$`Crime_rate`)
+
 colnames(Crime_Factors)
 
-Crime_Fit <- linear_reg() %>%
-  set_engine("lm") %>%
-  fit(`Crime_rate` ~ `Poverty Risk` + `Unemployment Rate` + `Divorce Rate` + 
-        `Non White British %` + `% Minority Religion`, data = Crime_Factors)
-tidy(Crime_Fit)
+
+### Model Testing/Training
+
+set.seed(6969)
+Crime_split <- initial_split(Crime_Factors)
+
+Crime_train <- training(Crime_split)
+Crime_test <- testing(Crime_split)
+
+Crime_mod <- linear_reg() %>%
+  set_engine("lm")
+  #fit(`Crime_rate` ~ . -`LC` )
+
+Crime_rec <- recipe(`Crime_rate` ~ ., data = Crime_train) 
+
+Crime_rec <- Crime_rec %>%
+  step_rm(`LC`, Number, Median, Mean, Population, `Median Age`, `Christian`, `White British %`, `Non-Religious`)
+
+Crime_wflow <- workflow() %>%
+  add_model(Crime_mod) %>%
+  add_recipe(Crime_rec)
+
+Crime_fit <- Crime_wflow %>%
+  fit(data = Crime_train)
+
+tidy(Crime_fit) %>%
+  print()
+
+Crime_train_pred <- predict(Crime_fit, Crime_train) %>%
+  bind_cols(Crime_train %>% select(`Crime_rate`, `LC`))
+
+Crime_train_pred
+rmse(Crime_train_pred, truth = `Crime_rate`, estimate = .pred)
+
+Crime_train %>%
+  summarise(min = min(`Crime_rate`), max = max(`Crime_rate`))
+
+Crime_test_pred <- predict(Crime_fit, Crime_test) %>%
+  bind_cols(Crime_test %>% select(`Crime_rate`, `LC`))
+
+Crime_test_pred
+rmse(Crime_test_pred, truth = `Crime_rate`, estimate = .pred)
+
+Crime_test_pred %>%
+  summarise(min = min(`Crime_rate`), max = max(`Crime_rate`))
+
+# tidy(Crime_mod) %>%
+#   print(n = 12)
+
+set.seed(69420)
+
+folds <- vfold_cv(Crime_train, v = 5)
+Crime_fit_rs <- Crime_wflow %>%
+  fit_resamples(folds)
+
+collect_metrics(Crime_fit_rs)
+
+
 
 ```
 
