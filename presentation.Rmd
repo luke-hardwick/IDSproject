@@ -73,18 +73,13 @@ style_xaringan(
 
 class: center, middle
 
-<<<<<<< HEAD
 ## We pose the question of what demographic factors lead to individuals committing crime and how these factors can influence sentencing
-=======
-## We pose the question of what demographic factors lead to individuals committing crime and how demographics can influence the experience of people when incarcerated
 
 ---
 
 ```{r prison, echo = FALSE, out.width = "70%", fig.align = "left", fig.cap = "Belmarsh Prison"}
 include_graphics("img/Roche-Belmarsh-Prison.jpg")
 ```
->>>>>>> da4f625263b36eb1be7d395f52f0975bd413b561
-
 ---
 
 class: inverse, center, middle
@@ -92,18 +87,83 @@ class: inverse, center, middle
 # How do demographics and regional incomes influence crime rates?
 
 ---
+.pull-left[
+``` {r demo_graphs1, echo = FALSE, fig.align = "left"}
+
+include_graphics("img/Demographic graphs/Poverty Risk.png")
+
+```
+
+``` {r demo_graphs2, echo = FALSE, fig.align = "left"}
+
+include_graphics("img/Demographic graphs/Divorce Rate.png")
+```
+]
+
+.pull-right[
+``` {r demo_graphs3, echo = FALSE, fig.align = "right"}
+
+include_graphics("img/Demographic graphs/Non White British.png")
+```
+
+``` {r demo_graphs4, echo = FALSE, fig.align = "right"}
+
+include_graphics("img/Demographic graphs/Unemployment rate.png")
+```
+]
+---
+
+.pull-left[
+```{r demo_nongraphs1, echo = FALSE, out.width = "110%", out.height = "110%"}
+
+include_graphics("img/Demographic graphs/Mean weekly pay.png")
+
+```
+
+]
+
+.pull-right[
+```{r demo_nongraphs2, echo = FALSE, out.width = "110%", out.height = "110%"}
+
+include_graphics("img/Demographic graphs/Median Weekly Pay.png")
+
+```
+
+]
 
 ---
 
-class: inverse, center, middle
+.pull-top[
+```{r demo_mod1, echo = FALSE, out.width = "80%", out.height = "80%", fig.align='center'}
 
-# What demographic factors contribute to the experience of inmates?
+include_graphics("img/Demographic model/model.png")
+
+```
+
+]
 
 ---
 
+.pull-top[
+```{r demo_mod2, echo = FALSE, out.width = "90%", out.height = "90%", fig.align='center'}
+
+include_graphics("img/Demographic model/validation.png")
+
+```
+
+]
+
+.pull-bottom[
+```{r demo_mod3, echo = FALSE, out.width = "90%", out.height = "90%", fig.align='center'}
+
+include_graphics("img/Demographic model/extremes.png")
+
+```
+
+]
+
 ---
 
-<<<<<<< HEAD
 class: inverse, center, middle
 
 # Which factors have the greatest influence in crime and sentencing?
