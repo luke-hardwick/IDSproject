@@ -15,59 +15,59 @@ library("xlsx")
 
 
 ```{r vis, out.width="100%"}
-# Still Very much in the early stages. This should be taken as rough working.
 
-Crimes_Region_County <- xlsx::read.xlsx("data/CSV/Crimes_by_County-Region.xlsx", sheetIndex = 4)
-Crimes_Region_County <- na.omit(Crimes_Region_County)
-colnames(Crimes_Region_County) <- Crimes_Region_County[1,]
-Crimes_Region_County <- Crimes_Region_County[-c(1,2,3),]
+# Crimes_Region_County <- xlsx::read.xlsx("data/CSV/Crimes_by_County-Region.xlsx", sheetIndex = 4)
+# Crimes_Region_County <- na.omit(Crimes_Region_County)
+# colnames(Crimes_Region_County) <- Crimes_Region_County[1,]
+# Crimes_Region_County <- Crimes_Region_County[-c(1,2,3),]
+# 
+# col_int <- c(4,10,11,12,21,22,23,24,25)
+# col_names <- c("Violence against the person", "Sexual offences", "Robbery", "Theft offences", 
+#                "Criminal damage and arson", "Drug offences", "Possesion of weapons offences", 
+#                "Public order offences", "Miscellaneous crimes") 
+# 
+# County_names <- Crimes_Region_County %>%
+#   filter(substr(`Area Code`, 1, 2) == "E2")
+# 
+# Region_names <- Crimes_Region_County %>% 
+#   filter(substr(`Area Code`, 1, 2) == "E1")
+# 
+# Region_names <- Region_names[2]
+# Region_names <- Region_names[,"Area Name"]
+# County_names <- County_names[2]
+# County_names <- County_names[,"Area Name"]
+# 
+# #Removes Violence and theft breakdown
+# Crimes_Region_County <- Crimes_Region_County[-c(5:9, 13:20)]
+# 
+# 
+# for(i in Region_names)
+# {
+#   
+#   crimes <- Crimes_Region_County %>% filter(`Area Name` == i)
+#   crimes <- crimes[c(1),]
+#   crimes <- crimes[-c(1,2,3)]
+#   
+#   df <- data.frame(matrix(ncol = 2, nrow = length(col_names)) )
+#   colnames(df) <- c("Crime", "Occurrences")
+#   
+#   for( j in c(1:length(col_names)) )
+#   {
+#     df[j,] <- c(col_names[j], as.numeric(crimes[j]))
+#   }
+#   
+#   df$Occurrences <- as.numeric(df$Occurrences)
+# 
+#   print(ggplot(df, aes(x = Crime, y = Occurrences, fill = Crime) ) + 
+#          geom_bar(stat = "identity") +
+#   scale_x_discrete(guide = guide_axis(n.dodge = 5)) + 
+#     labs(
+#       title = paste("Crime in", i)
+#     ))
+# 
+# }
 
-col_int <- c(4,10,11,12,21,22,23,24,25)
-col_names <- c("Violence against the person", "Sexual offences", "Robbery", "Theft offences", 
-               "Criminal damage and arson", "Drug offences", "Possesion of weapons offences", 
-               "Public order offences", "Miscellaneous crimes") 
-
-County_names <- Crimes_Region_County %>%
-  filter(substr(`Area Code`, 1, 2) == "E2")
-
-Region_names <- Crimes_Region_County %>% 
-  filter(substr(`Area Code`, 1, 2) == "E1")
-
-Region_names <- Region_names[2]
-Region_names <- Region_names[,"Area Name"]
-County_names <- County_names[2]
-County_names <- County_names[,"Area Name"]
-
-#Removes Violence and theft breakdown
-Crimes_Region_County <- Crimes_Region_County[-c(5:9, 13:20)]
-
-
-for(i in Region_names)
-{
-  
-  crimes <- Crimes_Region_County %>% filter(`Area Name` == i)
-  crimes <- crimes[c(1),]
-  crimes <- crimes[-c(1,2,3)]
-  
-  df <- data.frame(matrix(ncol = 2, nrow = length(col_names)) )
-  colnames(df) <- c("Crime", "Occurrences")
-  
-  for( j in c(1:length(col_names)) )
-  {
-    df[j,] <- c(col_names[j], as.numeric(crimes[j]))
-  }
-  
-  df$Occurrences <- as.numeric(df$Occurrences)
-
-  print(ggplot(df, aes(x = Crime, y = Occurrences, fill = Crime) ) + 
-         geom_bar(stat = "identity") +
-  scale_x_discrete(guide = guide_axis(n.dodge = 5)) + 
-    labs(
-      title = paste("Crime in", i)
-    ))
-
-}
-
+## A lot of the code is just mutating the local authority names so that they all match up when joining
 ####### Crime Rate 
 Crimes_Region_County_Per <- xlsx::read.xlsx("data/CSV/Crimes_by_County-Region.xlsx", sheetIndex = 6)
 Crimes_Region_County_Per <- na.omit(Crimes_Region_County_Per)
@@ -131,6 +131,7 @@ Crimes_County2 <- xlsx::read.xlsx("data/CSV/Crimes_County2.xlsx", sheetIndex = 2
 colnames(Crimes_County2) <- Crimes_County2[1,]
 
 colnames(Crimes_County2)[4] = "Number"
+
 Crimes_County2 <- Crimes_County2[-c(1,3)]
 Crimes_County2 <- na.omit(Crimes_County2)
 Crimes_County2 <- Crimes_County2 %>%
@@ -176,9 +177,9 @@ Crime_Factors$Median <- as.numeric(Crime_Factors$Median)
 ggplot(data = Crime_Factors, mapping = aes(x = `Mean`, y = `Crime_rate`, label = `LC`)) + 
   geom_point() + 
   labs(
-    title = "Mean weekly pay (£) vs Crime rate (Crimes per person)",
+    title = "Mean weekly pay (£) vs Crime rate (By Local Authority)",
     x = "Mean weekly pay (£)",
-    y = "Crime Rate"
+    y = "Crime Rate (Crimes per Capita)"
   ) + 
     geom_smooth(method = lm, se = FALSE)
 
@@ -186,9 +187,9 @@ ggplot(data = Crime_Factors, mapping = aes(x = `Mean`, y = `Crime_rate`, label =
 ggplot(data = Crime_Factors, mapping = aes(x = `Median`, y = `Crime_rate`, label = `LC`)) + 
   geom_point() + 
   labs(
-    title = "Median weekly pay (£) vs Crime rate (Crimes per person)",
+    title = "Median weekly pay (£) vs Crime rate (By Local Authority)",
     x = "Median weekly pay (£)",
-    y = "Crime Rate"
+    y = "Crime Rate (Crimes per Capita)"
   ) + 
     geom_smooth(method = lm, se = FALSE)
 
@@ -209,7 +210,14 @@ Crime_Factors <- Crime_Factors %>%
 
 ggplot(data = Crime_Factors, mapping = aes(x = `Poverty Risk`, y = `Crime_rate`)) + 
   geom_point() + 
-  geom_smooth(method = lm, se = FALSE)
+  geom_smooth(method = lm, se = FALSE) + 
+  labs(
+    title = "Poverty Risk Vs Crime rate (By Local Authority)",
+    x = "Poverty risk",
+    y = "Crime Rate (Crimes per Capita)"
+  )
+
+cor.test(Crime_Factors$`Poverty Risk`, Crime_Factors$`Crime_rate`)
 
 ### unemployment rate
 
@@ -230,7 +238,13 @@ Crime_Factors <- left_join(Crime_Factors, unemply_rate, by = "LC")
 
 ggplot(data = Crime_Factors, mapping = aes(x = `Unemployment Rate`, y = `Crime_rate`)) +
   geom_point() +
-  geom_smooth(method = lm, se = FALSE)
+  geom_smooth(method = lm, se = FALSE) +
+  labs(
+    title = "Unemployment Rate Vs Crime rate (By Local Authority)",
+    x = "Unemployment Rate",
+    y = "Crime Rate (Crimes per Capita)"
+  )
+cor.test(Crime_Factors$`Unemployment Rate`, Crime_Factors$`Crime_rate`)
 
 ###### Divorce Rate
 
@@ -246,9 +260,13 @@ Crime_Factors <- left_join(Crime_Factors, divorce_rate, by = "LC")
 
 ggplot(data = Crime_Factors, mapping = aes(x = `Divorce Rate`, y = `Crime_rate`)) + 
   geom_point() + 
-  geom_smooth(method = lm, se = FALSE)
-
-
+  geom_smooth(method = lm, se = FALSE) +
+  labs(
+    title = "Divorce Rate Vs Crime rate (By Local Authority)",
+    x = "Divorce Rate",
+    y = "Crime Rate (Crimes per Capita)"
+  )
+cor.test(Crime_Factors$`Divorce Rate`, Crime_Factors$`Crime_rate`)
 #### Ethnic Minority Population
 
 ethnic <- xlsx::read.xlsx("data/CSV/ethnic.xlsx", sheetIndex = 2)
@@ -280,8 +298,13 @@ Crime_Factors <- Crime_Factors %>%
 ggplot(data = Crime_Factors, mapping = aes(x = `Non White British %`, y = `Crime_rate`, label = `LC`)) + 
   geom_point() + 
   geom_smooth(method = lm, se = FALSE) + 
-  labs(title = "% Ethnic Minority Population Vs Crime Rate (by Local Authority)",
-       x = "% Non British White", y = "Crime Rate (per Capita)")
+  labs(
+    title = "% Ethnic Minority Population Vs Crime Rate (by Local Authority)",
+       x = "% Non British White",
+       y = "Crime Rate (Crimes per Capita)"
+    )
+
+cor.test(Crime_Factors$`Non White British %`, Crime_Factors$`Crime_rate`)
 
 #Crime_Factors
 
@@ -312,15 +335,85 @@ Crime_Factors <- Crime_Factors %>%
 
 ggplot(data = Crime_Factors, mapping = aes(x = `% Minority Religion`, y = `Crime_rate`)) + 
   geom_point() + 
-  geom_smooth(method = lm, se = FALSE)
+  geom_smooth(method = lm, se = FALSE) + 
+  labs(
+    title = "% Non-Christian or Irreligious Vs Crime Rate (by Local Authority)",
+       x = "% Non-Christian or Irreligious",
+       y = "Crime Rate (Crimes per Capita)"
+    )
+
+
+cor.test(Crime_Factors$`% Minority Religion`, Crime_Factors$`Crime_rate`)
 
 colnames(Crime_Factors)
 
-Crime_Fit <- linear_reg() %>%
-  set_engine("lm") %>%
-  fit(`Crime_rate` ~ `Poverty Risk` + `Unemployment Rate` + `Divorce Rate` + 
-        `Non White British %` + `% Minority Religion`, data = Crime_Factors)
-tidy(Crime_Fit)
+#Re-scale Columns for gradient interpretation
+
+cols <- c("Divorce Rate", "Poverty Risk", "Non White British %", "% Minority Religion", "Unemployment Rate")
+
+for(x in c(1:length(cols)))
+{
+  Crime_Factors[cols[x]] <- Crime_Factors[cols[x]]/max(Crime_Factors[cols[x]])
+}
+
+Crime_Factors
+
+### Model Testing/Training
+
+set.seed(1234)
+Crime_split <- initial_split(Crime_Factors)
+
+Crime_train <- training(Crime_split)
+Crime_test <- testing(Crime_split)
+
+Crime_mod <- linear_reg() %>%
+  set_engine("lm")
+
+Crime_rec <- recipe(`Crime_rate` ~ ., data = Crime_train) 
+
+Crime_rec <- Crime_rec %>%
+  step_rm(`LC`, Number, Median, Mean, Population, `Median Age`, `Christian`, `White British %`, `Non-Religious`)
+
+Crime_wflow <- workflow() %>%
+  add_model(Crime_mod) %>%
+  add_recipe(Crime_rec)
+
+Crime_fit <- Crime_wflow %>%
+  fit(data = Crime_train)
+
+tidy(Crime_fit) %>%
+  print()
+
+Crime_train_pred <- predict(Crime_fit, Crime_train) %>%
+  bind_cols(Crime_train %>% select(`Crime_rate`, `LC`))
+
+Crime_train_pred
+rmse(Crime_train_pred, truth = `Crime_rate`, estimate = .pred)
+
+Crime_train %>%
+  summarise(min = min(`Crime_rate`), max = max(`Crime_rate`))
+
+Crime_test_pred <- predict(Crime_fit, Crime_test) %>%
+  bind_cols(Crime_test %>% select(`Crime_rate`, `LC`))
+
+Crime_test_pred
+rmse(Crime_test_pred, truth = `Crime_rate`, estimate = .pred)
+
+Crime_test_pred %>%
+  summarise(min = min(`Crime_rate`), max = max(`Crime_rate`))
+
+# tidy(Crime_mod) %>%
+#   print(n = 12)
+
+set.seed(789)
+
+folds <- vfold_cv(Crime_train, v = 5)
+Crime_fit_rs <- Crime_wflow %>%
+  fit_resamples(folds)
+
+collect_metrics(Crime_fit_rs)
+
+
 
 ```
 

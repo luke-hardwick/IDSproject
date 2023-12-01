@@ -92,8 +92,83 @@ class: inverse, center, middle
 # How do demographics and regional incomes influence crime rates?
 
 ---
+.pull-left[
+``` {r demo_graphs1, echo = FALSE, fig.align = "left"}
+
+include_graphics("img/Demographic graphs/Poverty Risk.png")
+
+```
+
+``` {r demo_graphs2, echo = FALSE, fig.align = "left"}
+
+include_graphics("img/Demographic graphs/Divorce Rate.png")
+```
+]
+
+.pull-right[
+``` {r demo_graphs3, echo = FALSE, fig.align = "right"}
+
+include_graphics("img/Demographic graphs/Non White British.png")
+```
+
+``` {r demo_graphs4, echo = FALSE, fig.align = "right"}
+
+include_graphics("img/Demographic graphs/Unemployment rate.png")
+```
+]
+---
+
+.pull-left[
+```{r demo_nongraphs1, echo = FALSE, out.width = "110%", out.height = "110%"}
+
+include_graphics("img/Demographic graphs/Mean weekly pay.png")
+
+```
+
+]
+
+.pull-right[
+```{r demo_nongraphs2, echo = FALSE, out.width = "110%", out.height = "110%"}
+
+include_graphics("img/Demographic graphs/Median Weekly Pay.png")
+
+```
+
+]
 
 ---
+
+.pull-top[
+```{r demo_mod1, echo = FALSE, out.width = "80%", out.height = "80%", fig.align='center'}
+
+include_graphics("img/Demographic model/model.png")
+
+```
+
+]
+
+---
+
+.pull-top[
+```{r demo_mod2, echo = FALSE, out.width = "90%", out.height = "90%", fig.align='center'}
+
+include_graphics("img/Demographic model/validation.png")
+
+```
+
+]
+
+.pull-bottom[
+```{r demo_mod3, echo = FALSE, out.width = "90%", out.height = "90%", fig.align='center'}
+
+include_graphics("img/Demographic model/extremes.png")
+
+```
+
+]
+
+---
+
 
 class: inverse, center, middle
 
