@@ -73,8 +73,18 @@ style_xaringan(
 
 class: center, middle
 
-<<<<<<< HEAD
 ## We pose the question of what demographic factors lead to individuals committing crime and how these factors can influence sentencing
+
+---
+
+```{r prison, echo = FALSE, out.width = "70%", fig.align = "left", fig.cap = "Belmarsh Prison"}
+include_graphics("img/Roche-Belmarsh-Prison.jpg")
+```
+---
+
+class: inverse, center, middle
+
+# How do demographics and regional incomes influence crime rates?
 
 ---
 .pull-left[
@@ -152,35 +162,8 @@ include_graphics("img/Demographic model/extremes.png")
 
 ]
 
-
-## We pose the question of what demographic factors lead to individuals committing crime and how demographics can influence the experience of people when incarcerated
-
 ---
 
-```{r prison, echo = FALSE, out.width = "70%", fig.align = "left", fig.cap = "Belmarsh Prison"}
-include_graphics("img/Roche-Belmarsh-Prison.jpg")
-```
->>>>>>> da4f625263b36eb1be7d395f52f0975bd413b561
-
----
-
-class: inverse, center, middle
-
-# How do demographics and regional incomes influence crime rates?
-
----
-
----
-
-class: inverse, center, middle
-
-# What demographic factors contribute to the experience of inmates?
-
----
-
----
-
-<<<<<<< HEAD
 class: inverse, center, middle
 
 # Which factors have the greatest influence in crime and sentencing?
