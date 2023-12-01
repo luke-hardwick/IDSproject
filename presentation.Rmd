@@ -123,7 +123,7 @@ class: inverse, center, middle
 
 # the dataset
 
-- the variables that I was particularly interested in were: sex, religion, ethnicity, punishment and punishment length.  
+- the variables that I was particularly interested in were: sex, religion, ethnicity, age, punishment and punishment length.  
 
 - contains all the internal punishments for all prisons within England and Wales in the year 2021.
 
@@ -157,7 +157,7 @@ ggplot(data = solitaryage, mapping = aes(y = Age_group, x = mean_days_in_solitar
 
 #classification of high risk inmates
 
-- all inmates are objectively classified on their risk to the public and their potential risk to other inmates
+- all inmates are objectively classified on their risk to the public and their potential risk to other inmates from A to youth facility
 
 ```{r highriskreligion, echo = FALSE}
 ggplot(data = categoryareligion, mapping = aes(y = religion, x = percentage)) +
@@ -187,8 +187,9 @@ ggplot(data = categoryasex, mapping = aes(y = sex, x = percentage)) +
 
 #analysis 
 
-- all variables i.e. sex, ethnicity and religion all had their areas of bias
+- all variables i.e. sex, ethnicity, age and religion all had respective areas where one was being biased.
 
-e
+
+- 
 
 ---
