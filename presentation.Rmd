@@ -1,6 +1,6 @@
 ---
 title: "Prison Demographics"
-subtitle: "Crime Rates & Sentencing"
+subtitle: "Crime Rates & Incarceration"
 author: "LAJ <br> Luke Hardwick, Adam Smit, Jess Part"
 institute: "University of Edinburgh"
 date: "`r Sys.Date()`"
@@ -41,19 +41,49 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```{r load-data, include=FALSE}
 # Load your data here
 
+PunishmentsQ12023 <- read.csv("data/CSV/PunishmentsQ12023.csv")
+
+Punishmentsminusna <- PunishmentsQ12023 %>% filter(No_of_days != ".")
+Punishmentscellconfine <- Punishmentsminusna %>% filter(Punishment == "Cellular Confinement")
+Punishmentsnumeric <- Punishmentscellconfine %>% mutate(No_of_days = as.numeric(No_of_days))
+
+solitaryage <- Punishmentsnumeric %>% 
+  group_by(Age_group) %>%
+  summarise(
+    mean_days_in_solitary = mean(No_of_days)
+  )
+
+categoryareligion <- data.frame(religion = 
+  c("Muslim", "No religion", "Christian", "Other religious groups", "Buddhist", "Jewish", "Sikh", "Hindu", "Not recorded"),
+percentage = c(8.563744, 4.101825, 5.171328, 5.037783, 5.015198, 8.219178, 5.633803, 2.941176, 0))
+
+categoryasex <- data.frame(sex = 
+  c("Male", "Female"),
+percentage = c(5.989141, 0))
+
 ```
 
 ```{r include=FALSE}
 
 #Background image
 style_xaringan(
-  title_slide_background_image = "img/images.jpg"
+  title_slide_background_image = ("img/Black-Brick-Wall-Background-dark.jpg")
 )
 ```
 
 class: center, middle
 
+<<<<<<< HEAD
 ## We pose the question of what demographic factors lead to individuals committing crime and how these factors can influence sentencing
+=======
+## We pose the question of what demographic factors lead to individuals committing crime and how demographics can influence the experience of people when incarcerated
+
+---
+
+```{r prison, echo = FALSE, out.width = "70%", fig.align = "left", fig.cap = "Belmarsh Prison"}
+include_graphics("img/Roche-Belmarsh-Prison.jpg")
+```
+>>>>>>> da4f625263b36eb1be7d395f52f0975bd413b561
 
 ---
 
@@ -63,18 +93,17 @@ class: inverse, center, middle
 
 ---
 
-# Hello World
-
 ---
 
 class: inverse, center, middle
 
-# How much are specific factors connected with crime?
+# What demographic factors contribute to the experience of inmates?
 
 ---
 
 ---
 
+<<<<<<< HEAD
 class: inverse, center, middle
 
 # Which factors have the greatest influence in crime and sentencing?
@@ -83,27 +112,82 @@ class: inverse, center, middle
 
 # Sentencing and how it is affected by a potential criminals demographics
 
-- The prison inmate disparities respective to the United states are widely publicised and well known, however
+- The prison inmate disparities respective to the United states are widely publicised and well known. Especially their biased statistic of having a majority African american comprised population of inmates.
 
+- I decided to investigate these demographics within the prison system to see if they were reflected within our own prison system. 
+
+- I decided to focus on how already convicted inmates were treated so the dataset I used was one of internal punishments in prisons. e.g. loss of privileges, solitary confinement, warning.
 
 
 ---
 
-class: inverse, middle, center
+# the dataset
 
-# Using xaringan
+- the variables that I was particularly interested in were: sex, religion, ethnicity, punishment and punishment length.  
+
+- contains all the internal punishments for all prisons within England and Wales in the year 2021.
+
+- most interested in relationships able to be identified purely visually.
+
+- abstract statistical concepts can't be understood by majority of the population.
+
 
 ---
 
-# xaringan
+# solitary confinement lengths
 
-- The presentation is created using the `xaringan` package
+```{r solitary-age, echo = FALSE}
 
-- Use `---` to separate slides and `--` for incremental builds
+ggplot(data = solitaryage, mapping = aes(y = Age_group, x = mean_days_in_solitary)) +
+  geom_bar(stat = "identity") +
+  labs (
+    y = "age",
+    x = "average days in solitary",
+    title = "average time an age group spends in solitary",
+    subtitle = 
+      "The average amount of time each age group spends in solitary when sentenced to it as punishment whilst already incarcerated"
+  )
 
---
+```
 
-- Like this
+
+---
+
+#classification of high risk inmates
+
+- all inmates are objectively classified on their risk to the public and their potential risk to other inmates
+
+```{r highriskreligion, echo = FALSE}
+ggplot(data = categoryareligion, mapping = aes(y = religion, x = percentage)) +
+  geom_bar(stat = "identity") +
+  labs (
+    y = "Religion",
+    x = "proportion of people in high security establishments (%)",
+    title = "percentage of Religions considered to be high security risks",
+  )
+```
+
+---
+# high risk inmates part 2
+
+```{r highrisksex, echo = FALSE}
+ggplot(data = categoryasex, mapping = aes(y = sex, x = percentage)) +
+  geom_bar(stat = "identity") +
+  labs (
+    y = "Sex",
+    x = "proportion of people in high security establishments (%)",
+    title = "percentage of Religions considered to be high security risks",
+  )
+
+```
+
+---
+
+#analysis 
+
+- all variables i.e. sex, ethnicity and religion all had their areas of bias
+
+
 
 ---
 

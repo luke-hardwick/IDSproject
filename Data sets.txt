@@ -1,0 +1,31 @@
+Data sets
+
+ethnic.xlsx:
+https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationcharacteristicsresearchtables
+
+Experian LA rankings for poverty.xlsx (poverty_risk.xlsx):
+https://www.theguardian.com/news/datablog/2012/mar/06/poverty-england-experian-rankings#data
+(ranks each local authoritiy on poverty risk)
+
+Weekly Pay.xlsx:
+https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/placeofresidencebylocalauthorityashetable8
+(first xlsx file in the zip file)
+
+employmentlasewcensus2021.xlsx:
+https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/employmentinlocalauthoritiesenglandandwales
+
+Crimes_by_County-Region.xlsx:
+https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/datasets/policeforceareadatatables
+
+Economic_Stats.ods:
+https://www.gov.uk/government/statistics/income-and-tax-by-county-and-region-2010-to-2011
+
+divorce.xlsx:
+https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/marriagecohabitationandcivilpartnerships/datasets/legalpartnershipstatusbyagesexandlocalauthoritycensus2021
+(Not the exact source but the best I could find)
+
+Crimes_County2.xlsx:
+https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/datasets/recordedcrimedataatcommunitysafetypartnershiplocalauthoritylevel
+
+Population_Stats.xlsx:
+https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland

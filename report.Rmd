@@ -1,6 +1,6 @@
 ---
 title: "Prison Demographics"
-author: "by Team-Name: Jess Part, Adam Smit, Luke Hardwick"
+author: "LAJ: Jess Part, Adam Smit, Luke Hardwick"
 date: "`r Sys.Date()`"
 output: html_document
 ---
@@ -31,46 +31,33 @@ library(tidyverse)
 
 ## Research Question
 
-
-Prison reform has had huge relevance in recent UK politics. Overcrowding particularly has led to the general belief that the current prison system is unsustainable.With a 6% increase in prison population from 2022 to a total of 85,851 prisoners in June 2023. Guards have been placed in increasingly unsafe working conditions and as a response inmates face a huge duration of their time trapped in their cells. Chief Inspector of Prisons, Charlie Taylor, has warned that the prison population crisis “will mean more deprivation, squalor and the risk of further violence”. Inadequate conditions are likely to cause prisoners to be released back into the community without receiving the support that they require to prevent reoffending. Hence contributing further to the issue. We are interested in what causes people to initially end up behind bars. We pose the question of what demographic factors lead to individuals committing crime, and how demographics can influence sentencing. Specifically, we aim to determine how demographic factors and regional income influence crime rates, how much a specific factor is connected to crime and which factors have the greatest influence in both crime and sentencing. 
-
-
-
+We pose the question of what demographic factors relate to individuals committing crime and how demographics can influence the treatment inmates experience in prison.
 
 ## Data
 
-Prisoner population statistics (England & Wales), Gov.uk
+Prisoner population statistics (England & Wales)
 
-This data set includes the offender management statistics from January to March 2023 as provided by the UK government. Prison establishments record details for individual inmates using the prison IT system, which is the main source of data for this dataset. This includes information including date of birth, sex, religion, nationality, ethnic origin and offence. Which comprise the demographic factors which we are focusing on in this investigation. The dataset also includes information of sentencing by region within the UK & Wales, which we hope to combine with the mean income of regions to establish connections between poverty, crime and sentencing. In order to obtain information regarding income by region we needed to use an additional dataset. Poverty in the UK: Statistics, which includes percentage of people in relative low income and persistent low income by region.
+This data set includes the offender management statistics from January to March 2023 as provided by the UK government. Prison establishments record details for individual inmates using the prison IT system, which is the main source of data here. This includes information of date of birth, sex, religion, nationality, ethnic origin and offence. Which comprise the demographic factors which we are focusing on in this investigation. The dataset also includes information of sentencing by region within the UK & Wales, which we hope to combine with regional income, population statistics, employment and divorce rates  to establish their connections in crime and sentencing. 
 
+We selected additional datasets for income information. The Annual Survey of Hours and Earnings is an annual survey provided by the Office for National Statistics and details pay and paid hours. “Earnings and hours worked, place of residence” is a dataset derived from the ASHE, from which we are using weekly pay by local authority to model income. We are also using “Income and tax by county and region” for additional information as provided for the 2020 – 2021 financial year by the HMRC. For data on employment by region we’re using “Employment in Local Authorities” which covers adults experiencing employment, unemployment and inactivity as provided by the 2021 census. In addition to the prison population statistics, we are using regional populations of the selected demographics to explore their effect on crime rates. These are “Estimates of the population” and “Population characteristics research tables” provided by the ONS. 
 
-
+For our investigation into correlations between demographics and crime we chose datasets providing the offence group of crime committed. “Police Force Area data Tables” and “Recorded crime data” are both produced by the ONS and represent the years 2022 & 2018 respectively. An extra factor we investigated was the divorce rate provided by the “Legal partnership status by age, sex and local authority” as per the 2021 census to see if it had any influence on crime rate.
 
 ## Findings
 
-The write-up of your project and findings go here. 
+By using the police force area tables, we plotted the frequency of groups of offences for each region in bar charts. The most common group for all investigated regions except for London was violence against the person. In London the most prevalent types of crime were theft offences. This result is likely not because violence against the person is less likely to occur but instead because London is the most urban region. Crimes such as pick-pocketing, which are included in theft against the person, are more prevalent in cities and while cities are included in the other regions their more rural constituents are likely to offset the effect. Although higher policing would be influential cities do present an easier environment for theft to occur simply by volume of people.
 
-Reasons why demographics aren’t the only variables in crime detection:
+With current living costs in England bringing huge problems for many, we predicted that counties with a lower average income may experience people being driven to commit crime. This, however, was not the case. By using the recorded crime data at local authority level, plotting scatter graphs of crime by county against mean and median incomes and plotting trendlines we found no correlations between the variables. Although it may be that a correlation does not exist, there are reasons it may not show in the graphs we have created. The counties we are using, which are consistent for all datasets as provided by the government contain a range of living environments. It is not likely that everyone living in the same county has similar experiences with crime. Excluding London median workplace earnings in urban areas are greater than in the rural areas of England, however this does not consider the increased housing and living costs in urban areas. Crime is also less prevalent in rural areas with crime rates per capita lower for all offence types, although a decreased police presence would influence the volume of crimes recorded. 
 
-.Increase in policing, 2019 government manifesto to recruit 20,000 additional police officers has been fulfilled
+Using the police force area tables, we created a scatter plot of counties in England showing crime rate against mean & median income to further investigate the effect of location on crime. The plots did show a downwards trend. One county that does both have the highest average income and lowest crime rate is Surrey, Greater London was not included in this. This is not necessarily representative of a direct correlation however, as several extraneous variables exist here. Surrey is well known as a popular commuter county for those working out of London. Despite high average incomes in this county an obvious cash flow is traceable to London which despite not being included has one of the highest crime rates in the UK as well as highest income. One other factor to consider is that wealthy people either looking to commute whilst experiencing better housing options or retire away from the city are likely to look for regions with low crime. Whereas those experiencing pressure due to low income have less options to choose based on crime. These variables are applicable to other counties surrounding large cities in England. Which shows that low crime rates in an area may increase the income of the area by attracting those with high income and therefore may not show that people with higher incomes are less likely to commit crime.
 
-.Traditionally density of police force is spread unevenly between demographics, although crime may be less prevalent in affluent areas it is also less likely to be detected due to this.
+One other measure we used to test for correlation between crime rate and financial security was the poverty risk of counties as provided by Experian. A scatter plot and trendline here showed a positive correlation. Experian created this poverty risk index mainly by using their “Mosaic Public Sector” which is a modified version of their customer classification and combining this with external data they derived a baseline to create a specific indicator of poverty. This result provides evidence that poverty risk corresponds to crime rate. This is not a surprising result as individuals facing poverty may view crime as a viable way to support themselves. With some connection to income, we inspected unemployment with crime rates. We plotted crime rates against unemployment rates by local authority as given by the ONS, the resulting trend line showed a positive correlation. For adults with no source of income except potentially unemployment benefits it is likely that this result relates to our positive correlation between poverty risk and crime rates. An additional factor with influence here is that those without secure employment may have more opportunity to commit crime. 
 
+Using the legal partnership status provided by the 2021 census we plotted crime rates against divorce rates by local authority and by the trendline found a positive correlation between the variables. Divorce not only influences those losing a marriage but also any potential children involved. Those who are getting divorced often choose to live separately and split assets which can be a financially and emotionally draining process which again relates back to the correlation between financial stability and crime. Whereas children who experience their parents going through a divorce may face periods of childhood unrest and lack feelings of stability which could later lead to them committing crime. Although we were unable to find concrete reasoning why divorce rates vary by area which questions the validity of this result. 
 
-Think of this as the text of your presentation with some extra detail to cover what there was not time to discuss in the presentation. This might include any assumptions you made when doing your analysis, any limitations of the work you have done or any ideas you have for future work. Feel free to split this section into subsections to make it easier to read. 
+One of the demographics we have been investigating is ethnicity. By plotting the crime rates by local authority against the percentage of the population which comprises ethnic minorities we found a positive correlation between the two. The reasons for this are numerous. They may include that areas with larger populations of ethnic minorities have historically been overpoliced resulting in a higher detection of crime. Or, that refugees with limited financial background or access to their finances mostly comprise of ethnic minorities. Also, immigrants to the UK from less developed nations have not yet had the opportunity to build generational wealth in the UK which again contributes to their risk of experiencing poverty leading to committing crime, as explored. As for the treatment of different ethnicities whilst incarcerated. Results by bar chart do not conclude that ethnic minorities are any more or less likely to be considered a high security risk or to spend a longer average time placed in solitary confinement, a punishment intended to combat poor behaviour of inmates, when compared with their white counterparts. We have also considered religion as a demographic and have assigned minority religions as any religion not Christianity or non-religious. By similarly plotting crime rates against minority religions percentages by local authority a positive trend was again found. This is likely again caused by a multitude of reasons but will also follow reasoning like that outlined for ethnic minorities. No significant differences were found on whether people of different religions spent more time in solitary confinement indicating that the behaviour of inmates is unlikely to be very affected by their religious beliefs. However, Muslim or Jewish people are more likely to be classified as high security risk. This may be of interest in discussions of antisemitism and islamophobia in the UK. Muslims particularly who were most likely to be seen as high security risk likely had this classification made partly because of the effect terrorism has had on the UK in recent years.
 
-The length should be roughly 1,500 words. 
-If you want to use a word count addin, you can install this by copying and pasting the following into RStudio:
-
-`devtools::install_github("benmarwick/wordcountaddin", type = "source", dependencies = TRUE)`
-
-You will then need to restart RStudio. Once you have done that, select the text you want to count the words of, go to Addins, and select the `Word count` addin.
-This addin counts words using two different algorithms, but the results should be similar and as long as you're in the ballpark of 1,500 words, you're good! 
-The addin will ignore code chunks and only count the words in prose. If you don't want to use the addin you can always copy and paste the text into Microsoft Word to do a Word Count!
-
-You can also load your data here and present any analysis results / plots.
-Make sure to hide your code with  `echo = FALSE` unless the point you are trying to make is about the code itself, in which case you should show your code.
-
+Regarding the ways age plays an impact for prison inmates. We found by bar chart that 18–20-year-olds and those 70 or over both spent less time on average in solitary confinement. For 18–20-year-olds it is likely their first time in prison and are not old enough to already be more than 2 years into their sentences at the prison.  Hence, they may not be as used to their surroundings as older inmates and have not yet fallen into the behaviours that lead to stays in solitary. As for those 70+ it would perhaps be more difficult for them to commit to these behaviours. This is in contrast with the percentage of those 70+ who are classified as high security risk as they are the highest security age range. This may be because those at older ages could build up a lifetime of offences, they are also those most likely to be serving life sentences for the most serious crimes.
 
 
 
@@ -79,7 +66,29 @@ Make sure to hide your code with  `echo = FALSE` unless the point you are trying
 
 Ministry of Justice, HM Prison and Probation service, 2023, Offender Management statistics quarterly: January to March 2023, Electronic dataset, Viewed 23/11/2023 <https://www.gov.uk/government/statistics/offender-management-statistics-quarterly-january-to-march-2023>
 
-House of Commons Library, 2023, Poverty in the UK: Statistics, Electronic dataset, Viewed 23/11/2023 <https://commonslibrary.parliament.uk/research-briefings/sn07096/>
+Office for National Statistics, 2023, Earnings and hours worked, place of residence by local authority: ASHE Table 8, Electronic dataset, Viewed 28/11/2023
+<https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/placeofresidencebylocalauthorityashetable8>
+
+Office for National Statistics, 2023, Employment in Local Authorities, England and Wales, Electronic dataset, Viewed 28/11/2023
+<https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/employmentinlocalauthoritiesenglandandwales>
+
+Office for National Statistics, 2019, Population characteristics research tables, Electronic dataset, Viewed 28/11/2023
+<https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationcharacteristicsresearchtables>
+
+Office for National Statistics, 2022, Legal partnership status by age, sex and local authority Census 2021, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/marriagecohabitationandcivilpartnerships/datasets/legalpartnershipstatusbyagesexandlocalauthoritycensus2021>
+
+Office for National Statistics, 2023, Crime in England and Wales: Police Force Area data Tables, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/datasets/policeforceareadatatables> 
+Office for National Statistics, 2019, Recorded crime data at Community Safety Partnership and local authority level, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/datasets/recordedcrimedataatcommunitysafetypartnershiplocalauthoritylevel>
+
+GOV.UK, HM Revenue & Customs, 2023, Income and tax by county and region:2020 to 2021, Electronic dataset, Viewed 28/11/2023 
+<https://www.gov.uk/government/statistics/income-and-tax-by-county-and-region-2010-to-2011>  
+
+Office for National Statistics, 2022, Estimates of the Population for the UK, England, Wales, Scotland and Nothern Ireland, Electronic dataset, Viewed 28/11/2023 <https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland>
+
+Experian, Poverty in England: how Experian ranks where you live, Electronic dataset, Viewed 28/11/2023 <https://www.theguardian.com/news/datablog/2012/mar/06/poverty-england-experian-rankings#data>
+
+
+
 
 
 

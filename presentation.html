@@ -4,7 +4,7 @@
     <title>Prison Demographics</title>
     <meta charset="utf-8" />
     <meta name="author" content="LAJ   Luke Hardwick, Adam Smit, Jess Part" />
-    <meta name="date" content="2023-11-30" />
+    <meta name="date" content="2023-12-01" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 # Prison Demographics
 ]
 .subtitle[
-## Crime Rates &amp; Sentencing
+## Crime Rates &amp; Incarceration
 ]
 .author[
 ### LAJ <br> Luke Hardwick, Adam Smit, Jess Part
@@ -25,7 +25,7 @@ class: center, middle, inverse, title-slide
 ### University of Edinburgh
 ]
 .date[
-### 2023-11-30
+### 2023-12-01
 ]
 
 ---
@@ -44,7 +44,18 @@ class: center, middle, inverse, title-slide
 
 class: center, middle
 
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 ## We pose the question of what demographic factors lead to individuals committing crime and how these factors can influence sentencing
+=======
+## We pose the question of what demographic factors lead to individuals committing crime and how demographics can influence the experience of people when incarcerated
+
+---
+
+&lt;div class="figure" style="text-align: left"&gt;
+&lt;img src="img/Roche-Belmarsh-Prison.jpg" alt="Belmarsh Prison" width="70%" /&gt;
+&lt;p class="caption"&gt;Belmarsh Prison&lt;/p&gt;
+&lt;/div&gt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; da4f625263b36eb1be7d395f52f0975bd413b561
 
 ---
 
@@ -54,18 +65,17 @@ class: inverse, center, middle
 
 ---
 
-# Hello World
-
 ---
 
 class: inverse, center, middle
 
-# How much are specific factors connected with crime?
+# What demographic factors contribute to the experience of inmates?
 
 ---
 
 ---
 
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 class: inverse, center, middle
 
 # Which factors have the greatest influence in crime and sentencing?
@@ -74,27 +84,53 @@ class: inverse, center, middle
 
 # Sentencing and how it is affected by a potential criminals demographics
 
-- The prison inmate disparities respective to the United states are widely publicised and well known, however
+- The prison inmate disparities respective to the United states are widely publicised and well known. Especially their biased statistic of having a majority African american comprised population of inmates.
 
+- I decided to investigate these demographics within the prison system to see if they were reflected within our own prison system. 
+
+- I decided to focus on how already convicted inmates were treated so the dataset I used was one of internal punishments in prisons. e.g. loss of privileges, solitary confinement, warning.
 
 
 ---
 
-class: inverse, middle, center
+# the dataset
 
-# Using xaringan
+- the variables that I was particularly interested in were: sex, religion, ethnicity, punishment and punishment length.  
+
+- contains all the internal punishments for all prisons within England and Wales in the year 2021.
+
+- most interested in relationships able to be identified purely visually.
+
+- abstract statistical concepts can't be understood by majority of the population.
+
 
 ---
 
-# xaringan
+# solitary confinement lengths
 
-- The presentation is created using the `xaringan` package
+&lt;img src="presentation_files/figure-html/solitary-age-1.png" width="80%" /&gt;
 
-- Use `---` to separate slides and `--` for incremental builds
 
---
+---
 
-- Like this
+#classification of high risk inmates
+
+- all inmates are objectively classified on their risk to the public and their potential risk to other inmates
+
+&lt;img src="presentation_files/figure-html/highriskreligion-1.png" width="80%" /&gt;
+
+---
+# high risk inmates part 2
+
+&lt;img src="presentation_files/figure-html/highrisksex-1.png" width="80%" /&gt;
+
+---
+
+#analysis 
+
+- all variables i.e. sex, ethnicity and religion all had their areas of bias
+
+
 
 ---
 
