@@ -47,13 +47,21 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 
 #Background image
 style_xaringan(
-  title_slide_background_image = "img/images.jpg"
+  title_slide_background_image = ("img/Black-Brick-Wall-Background-dark.jpg")
 )
 ```
 
 class: center, middle
 
 ## We pose the question of what demographic factors lead to individuals committing crime and how demographics can influence the experience of people when incarcerated
+
+---
+.pull-left[
+- Why did we select this question?
+- Distribution of the project]
+```{r prison, echo = FALSE, out.width = "65%", fig.align = "right", fig.cap = "Belmarsh Prison"}
+include_graphics("img/Roche-Belmarsh-Prison.jpg")
+```
 
 ---
 
